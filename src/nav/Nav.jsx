@@ -1,19 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import s from './Nav.module.css';
 
 class Nav extends React.Component{
-    render(){
-        return (
-            <nav>
-                <ul>
-                    <li><a href="/quotes">Random Quotes</a></li>
-                    <li><a href="/markdown">Markdown</a></li>
-                    <li><a href="/drum">Drum</a></li>
-                    <li><a href="/calculator">Calculator</a></li>
-                    <li><a href="/clock">Clock</a></li>
-                </ul>
-            </nav>
-        )
-    }
+  render(){
+    return (
+      <nav class={s.Nav}>
+        <ul>
+          <Link to={'quotes'}>Random Quotes</Link>
+          <Link to={'markdown'}>Markdown</Link>
+          <Link to={'drum'}>Drum</Link>
+          <Link to={'calculator'}>Calculator</Link>
+          <Link to={'clock'}>Clock</Link>
+        </ul>
+      </nav>
+    )
+  }
 }
 
 export default Nav

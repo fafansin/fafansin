@@ -15,12 +15,18 @@ import Clock from './clock/Clock';
 
 // Routing data
 const router = createBrowserRouter([
-  { path: '/', element: <Root />, errorElement: <ErrorPage /> },
-  { path: 'quotes', element: <Quotes /> },
-  { path: 'markdown', element: <Markdown /> },
-  { path: 'drum', element: <Drum /> },
-  { path: 'calculator', element: <Calculator /> },
-  { path: 'clock', element: <Clock /> },
+  { 
+    path: '/', 
+    element: <Root />, 
+    errorElement: <ErrorPage />,
+    children: [
+      { path: 'quotes', element: <Quotes /> },
+      { path: 'markdown', element: <Markdown /> },
+      { path: 'drum', element: <Drum /> },
+      { path: 'calculator', element: <Calculator /> },
+      { path: 'clock', element: <Clock /> },
+    ]
+  },
 
 ])
 

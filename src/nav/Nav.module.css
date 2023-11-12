@@ -1,0 +1,16 @@
+.Nav{
+  background-color: gray;
+}
+
+.Nav ul{
+  display:flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+  padding: 10px;
+}
+
+.Nav ul a{
+  color: whitesmoke;
+  text-decoration: none;
+}
