@@ -1,0 +1,23 @@
+.quote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: yellow;
+  width: 100%;
+  height: 100%;
+}
+#author {
+  text-align: right;
+}
+#quote-box {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  background-color: #ffffff;
+}
+.btIcon {
+  width: 50px;
+}

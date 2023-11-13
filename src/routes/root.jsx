@@ -8,8 +8,10 @@ class Root extends React.Component{
   render(){
     return(
       <>
-        <Nav />
-        <div id="content" class={s.content}>
+        <div className={s.navWrap}>
+          <Nav />
+        </div>
+        <div id="content" className={s.content}>
           <Outlet />
         </div>
       </>

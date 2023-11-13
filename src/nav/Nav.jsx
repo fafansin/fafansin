@@ -5,7 +5,7 @@ import s from './Nav.module.css';
 class Nav extends React.Component{
   render(){
     return (
-      <nav class={s.Nav}>
+      <nav className={s.Nav}>
         <ul>
           <Link to={'quotes'}>Random Quotes</Link>
           <Link to={'markdown'}>Markdown</Link>
