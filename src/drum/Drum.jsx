@@ -1,11 +1,37 @@
-import React from 'react';
+import { useEffect } from 'react';
 
-class Drum extends React.Component{
-    render(){
-        return (
-            <h1>Drum</h1>
-        )
+export default function Drum() {
+  
+  const list = ['E','A','S','D','Z','X','C'];
+
+  function onClick(event){
+    event.preventDefault();
+    console.log(event.target.value);
+  }
+
+  useEffect(() => {
+    window.addEventListener('keyup', onKeyUp);
+
+    return () => {
+      window.removeEventListener('keyup', onKeyUp);
     }
-}
+  })
 
-export default Drum
+  function onKeyUp(event){
+    event.preventDefault();
+    console.log(event)
+  }
+  
+  return (
+      <div id="drum-machine" onKeyUp={onKeyUp}>
+        <div id="display">
+          { 
+            list.map((item) => (
+              <button id={item} key={item}
+                onClick={onClick} value={item}>{item}</button>))
+          }
+        </div>
+      </div>
+  )
+    
+}
