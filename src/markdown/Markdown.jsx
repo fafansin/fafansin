@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { marked } from 'marked';
+import initial from './initial.js';
 
+marked.use({breaks:true})
 export default function Markdown (){
-  const [ markup, setMarkup] = useState('Singapore')
+  const [ markup, setMarkup] = useState(initial)
   
   return(
     <div className="markdown">
