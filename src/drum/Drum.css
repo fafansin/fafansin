@@ -1,0 +1,26 @@
+.drum-pads{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+  border: 1px solid green;
+  width: 350px;
+}
+.drum-pad{
+  border:1px solid black;
+  width: 100px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  background:grey;
+  box-shadow: black 3px 3px 5px;
+  border-radius: 5px;
+  cursor:pointer;
+}
+.drum-pad:hover{
+  box-shadow: none;
+}
+#display{
+  height:40px;
+}

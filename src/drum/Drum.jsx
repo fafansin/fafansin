@@ -1,35 +1,20 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
+import Pad from './Pad';
+import padlist from './padlist.js';
+import './Drum.css';
 
 export default function Drum() {
+  const [display,setDisplay] = useState('');
   
-  const list = ['E','A','S','D','Z','X','C'];
-
-  function onClick(event){
-    event.preventDefault();
-    console.log(event.target.value);
+  function onPress(data){
+    setDisplay(data.display);
   }
 
-  useEffect(() => {
-    window.addEventListener('keyup', onKeyUp);
-
-    return () => {
-      window.removeEventListener('keyup', onKeyUp);
-    }
-  })
-
-  function onKeyUp(event){
-    event.preventDefault();
-    console.log(event)
-  }
-  
   return (
-      <div id="drum-machine" onKeyUp={onKeyUp}>
-        <div id="display">
-          { 
-            list.map((item) => (
-              <button id={item} key={item}
-                onClick={onClick} value={item}>{item}</button>))
-          }
+      <div id="drum-machine">
+        <h1 id="display">{display}</h1>
+        <div className="drum-pads">
+          { padlist.map((item) => <Pad key={item.name} {...item} onPress={onPress}/>)}
         </div>
       </div>
   )
