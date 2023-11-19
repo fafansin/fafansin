@@ -21,6 +21,6 @@
 .drum-pad:hover{
   box-shadow: none;
 }
-#display{
+#drum-machine #display{
   height:40px;
 }
