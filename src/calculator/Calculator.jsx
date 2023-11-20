@@ -5,15 +5,14 @@ const Calculator = () => {
   const [ formula, setFormula ] = useState(0);
   const [ display, setDisplay ] = useState(0);
   
-
   const numbers = [1,2,3,4,5,6,7,8,9,0,'.']
-  const operations = ['+', '-', "*", "/"]
   
     
   function onPress(event){
     event.preventDefault();
     const value = event.target.value
-    const isFirst = display == 0;
+    const isFirst = display === 0;
+    
     //
     const isNumber = numbers.findIndex((num) => num === parseInt(value)) >= 0;
     const isPrevNum = numbers.findIndex((num) => num === parseInt(formula[formula.length-1])) >= 0;
@@ -25,19 +24,18 @@ const Calculator = () => {
       setFormula(value);
     }else{
       if(isNumber){
+        setFormula(`${formula}${value}`);
         if(isPrevNum){
           setDisplay(`${display}${value}`);
         }else{
           setDisplay(value);
         }
-        setFormula(`${formula}${value}`);
       }else{
-        if(isPrevNum){
-          setDisplay(value);
+        setDisplay(value);
+        if(value === '-' && isPrevNum){
           setFormula(`${formula}${value}`);
         }else{
-          setDisplay(value);
-          setFormula(`${formula.slice(0, formula.length-1)}${value}`)
+          setFormula(`${formula.slice(0, formula.length-1)}${value}`);
         }
       }
     }
