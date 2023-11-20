@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Pad from './Pad';
+import Pad from './pad';
 import padlist from './padlist.js';
 import './Drum.css';
 
