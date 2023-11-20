@@ -1,13 +1,46 @@
+.Calculator{
+  background:black;
+  padding: 5px;  
+}
+.display-wrap{
+  border: solid 1px;
+  padding: 5px 0;
+}
+.display-wrap div{
+  width: 350px;
+  text-align: right;
+  font-size: 1.5rem;
+}
+#display{
+  color: whitesmoke;
+  overflow-wrap: normal;
+}
+#formula{
+  color: orange;
+  overflow-wrap: break-word;
+}
 .pads-wrap{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
   border: 1px solid black;
-  padding: 5px;
 }
 .pad{
   min-width: 50px;
-  min-height: 50px;
+  min-height: 70px;
+  background-color: grey;
+  border-style: none;
+  font-family: arial, sans-serif;
+  color: whitesmoke;
+  font-size: 1.2rem;
+}
+.pad:hover{
+  background-color: rgb(144, 143, 143);
+  border: 1px solid white;
+  color: rgb(66, 65, 65);
+}
+.pad:active{
+  background-color: rgb(94, 93, 93);
 }
 
 .wide{
@@ -17,4 +50,28 @@
 .tall{
   grid-column-start: 4;
   grid-row: 4/6;
+}
+
+#clear{
+  background-color: brown;
+}
+#clear:hover{
+  background-color: rgb(181, 45, 45);
+}
+#clear:active{
+  background-color: rgb(141, 35, 35);
+}
+
+#equals{
+  background-color: rgb(68, 68, 247);
+}
+#equals:hover{
+  background-color: rgb(81, 81, 247);
+}
+#equals:active{
+  background-color: rgb(54, 54, 245);
+}
+
+.operation{
+  background-color: rgb(80, 78, 78);
 }
