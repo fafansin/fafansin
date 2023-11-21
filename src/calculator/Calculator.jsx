@@ -5,54 +5,149 @@ const Calculator = () => {
   const [ formula, setFormula ] = useState('');
   const [ display, setDisplay ] = useState(0);
   
+  const regex = /[0-9]|\./;
 
-  const numbers = [1,2,3,4,5,6,7,8,9,0,'.']
-  // const operations = ['+', '-', "*", "/"]
-  
+  const numbers = [1,2,3,4,5,6,7,8,9,0,'.'];
+  const operations = ['+', '-', "*", "/"];
     
   function onPress(event){
     event.preventDefault();
-    const value = event.target.value
-    const isFirst = formula === '';
-    const prevNum = formula[formula.length-1];
-    const prevNum2 = formula[formula.length-2];
+    const value = event.target.value;
     
+    const isNumber = numbers.find(item => item == value) != undefined;
+    const isOperation = operations.find(item => item == value) != undefined;
+    
+    const isFirstChar = display == 0;
+    const lastChar = formula[formula.length -1 ];
     //
-    const isNumber = numbers.findIndex((num) => num === parseInt(value)) >= 0;
-    const isPrevNum = numbers.findIndex((num) => num === parseInt(prevNum)) >= 0;
-    const isPrevNum2 = numbers.findIndex((num) => num === parseInt(prevNum2)) >= 0;
-    
-    if(isFirst){ // Is First Character
-      setDisplay(value);
-      setFormula(value);
-    }else{
-      if(isNumber){ // Number ka kasi
-        if(isPrevNum){
-          setDisplay(`${display}${value}`);
+    const idx = formula.indexOf("=");
+    let solved = 0;
+    if(idx >=0){
+      solved = formula.substring(idx + 1);
+    }
+
+    switch(true){
+      case value === '.':
+        if(isFirstChar){
+          setDisplay('0.');
         }else{
-          setDisplay(value);
-        }
-        setFormula(`${formula}${value}`);
-      }else{ // Hindi ka Number
-        setDisplay(value);
-        if(isPrevNum){ //hindi ka number at before mo ay number
-          setFormula(`${formula}${value}`);
-        }else{ // hindi ka number at before mo ay hindi number
-          if(value === '-' && isPrevNum2){ //hindi ka number, before mo eh hindi din number pero - ka
+          //check mo kung meron na dating '.';
+          if(!display.includes('.')){
+            setDisplay(`${display}${value}`);
             setFormula(`${formula}${value}`);
-          }else{ //hindi ka number, before mo hindi number at hindi ka -
-            if(prevNum2 !== undefined && !isPrevNum2){
-              setFormula(`${formula.slice(0, formula.length-2)}${value}`)
+          }
+        }
+      break;
+      case value === '-':
+        if(isFirstChar){
+          setDisplay(value);
+          setFormula(value);
+        }else{
+          if(lastChar !== '-'){
+            let form = solved ? solved : formula;
+            setDisplay(value)
+            setFormula(`${form}${value}`)
+          }
+        }
+      break;
+      case isOperation:
+        if(!isFirstChar){
+          
+          let form = solved ? solved : formula;
+          let disp = solved ? solved : display;
+          const lastChar = disp[disp.length -1];
+          const secondToLast = form[form.length -2];
+          if(numbers.find(item => item == lastChar) != undefined) { //kung number ang last char
+            setDisplay(value);
+            setFormula(`${form}${value}`);
+          }else{
+            setDisplay(value);
+            if(secondToLast != undefined && operations.find(item => item == secondToLast) != undefined){
+              setFormula(`${form.substring(0,form.length - 2)}${value}`);
             }else{
-              setFormula(`${formula.slice(0, formula.length-1)}${value}`)
+              setFormula(`${form.substring(0,form.length - 1)}${value}`);
             }
           }
         }
-      }
+      break;
+      case isNumber:
+        if(isFirstChar || solved){
+          setDisplay(value);
+          setFormula(value);
+        }else{
+          const lastChar = formula[formula.length -1];
+          if(numbers.find(item => item == lastChar) != undefined || lastChar == '-') { 
+            setDisplay(`${display}${value}`);
+          }else{
+            setDisplay(value);
+          }
+          setFormula(`${formula}${value}`);
+        }
+      break;
+      case value === '=':
+        const regex = /[0-9]|\./;
+        let temp = '';
+        let all = [];
+        
+        for(let i =0; i < formula.length; i++){
+          let curr = formula[i];
+          let prev = formula[i-1]
+          
+          if(regex.test(curr)){
+            temp += curr;
+          }else{
+            if(regex.test(prev)){ // Operator ka tas ang previous ay number
+              all.push(parseFloat(temp));  
+              all.push(curr);
+              temp = '';
+            }else{ //Operator ka tas previous mo operator din. malamang negative ka
+              temp = curr;
+            }
+          }
+        }
+        all.push(parseFloat(temp));
+        
+        if(isNaN(all[all.length-1])){
+          all.pop()
+        }
+        if(isNaN(all[all.length-1])){
+          all.pop()
+        }
+        
+        let total = all.reduce((prev, curr) => {
+          if(typeof curr == 'number'){
+            switch(prev.operation){
+              case "+":
+                return {total:prev.total + curr, operation:prev.operation}
+                break;
+              case '-':
+                return {total:prev.total - curr, operation:prev.operation}
+                break;
+              case '/':
+                console.log("DIVIDE")
+                return {total:prev.total / curr, operation:prev.operation}
+                break;
+              case '*':
+                console.log("MULTIPLY")
+                return {total:prev.total * curr, operation:prev.operation}
+                break;
+            }
+          }else{
+            return {total:prev.total, operation:curr}
+          }
+        }, {total:0, operation:'+'})
+        
+        setDisplay(total.total);
+        setFormula(`${formula}=${total.total}`);
+      break;
+      default:
+        console.log('LONER SA DEFAULT');
+      break;
     }
     
-    
   }
+
+
   function onDecimal(event){
     console.log(event.target.value);
   }
@@ -91,7 +186,7 @@ const Calculator = () => {
         <button className="pad tall" id="equals" onClick={onPress} value="=">=</button>
         
         <button className="pad wide" id="zero" onClick={onPress} value="0">0</button>
-        <button className="pad" id="decimal" onClick={onDecimal} value=".">.</button>
+        <button className="pad" id="decimal" onClick={onPress} value=".">.</button>
         
       </div>
     </div>
