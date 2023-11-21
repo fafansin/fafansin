@@ -2,12 +2,12 @@ import { useState } from 'react';
 import './Calculator.css';
 
 const Calculator = () => {
-  const [ formula, setFormula ] = useState(0);
+  const [ formula, setFormula ] = useState('');
   const [ display, setDisplay ] = useState(0);
   
 
   const numbers = [1,2,3,4,5,6,7,8,9,0,'.']
-  const operations = ['+', '-', "*", "/"]
+  // const operations = ['+', '-', "*", "/"]
   
     
   function onPress(event){
@@ -59,7 +59,7 @@ const Calculator = () => {
 
   function onClear(event){
     event.preventDefault();
-    setFormula(0);
+    setFormula('');
     setDisplay(0);
   }
 
@@ -92,11 +92,6 @@ const Calculator = () => {
         
         <button className="pad wide" id="zero" onClick={onPress} value="0">0</button>
         <button className="pad" id="decimal" onClick={onDecimal} value=".">.</button>
-        
-        
-        
-        
-        
         
       </div>
     </div>
