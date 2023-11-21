@@ -13,31 +13,40 @@ const Calculator = () => {
   function onPress(event){
     event.preventDefault();
     const value = event.target.value
-    const isFirst = display == 0;
+    const isFirst = formula === '';
+    const prevNum = formula[formula.length-1];
+    const prevNum2 = formula[formula.length-2];
+    
     //
     const isNumber = numbers.findIndex((num) => num === parseInt(value)) >= 0;
-    const isPrevNum = numbers.findIndex((num) => num === parseInt(formula[formula.length-1])) >= 0;
-    console.log('is prev num', isPrevNum);
-
-    // Is First Character
-    if(isFirst){
+    const isPrevNum = numbers.findIndex((num) => num === parseInt(prevNum)) >= 0;
+    const isPrevNum2 = numbers.findIndex((num) => num === parseInt(prevNum2)) >= 0;
+    
+    if(isFirst){ // Is First Character
       setDisplay(value);
       setFormula(value);
     }else{
-      if(isNumber){
+      if(isNumber){ // Number ka kasi
         if(isPrevNum){
           setDisplay(`${display}${value}`);
         }else{
           setDisplay(value);
         }
         setFormula(`${formula}${value}`);
-      }else{
-        if(isPrevNum){
-          setDisplay(value);
+      }else{ // Hindi ka Number
+        setDisplay(value);
+        if(isPrevNum){ //hindi ka number at before mo ay number
           setFormula(`${formula}${value}`);
-        }else{
-          setDisplay(value);
-          setFormula(`${formula.slice(0, formula.length-1)}${value}`)
+        }else{ // hindi ka number at before mo ay hindi number
+          if(value === '-' && isPrevNum2){ //hindi ka number, before mo eh hindi din number pero - ka
+            setFormula(`${formula}${value}`);
+          }else{ //hindi ka number, before mo hindi number at hindi ka -
+            if(prevNum2 !== undefined && !isPrevNum2){
+              setFormula(`${formula.slice(0, formula.length-2)}${value}`)
+            }else{
+              setFormula(`${formula.slice(0, formula.length-1)}${value}`)
+            }
+          }
         }
       }
     }
