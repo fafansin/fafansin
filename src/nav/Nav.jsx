@@ -7,6 +7,7 @@ class Nav extends React.Component{
     return (
       <nav className={s.Nav}>
         <ul>
+          <Link to={''}>Home</Link>
           <Link to={'quotes'}>Random Quotes</Link>
           <Link to={'markdown'}>Markdown</Link>
           <Link to={'drum'}>Drum</Link>

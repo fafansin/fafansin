@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Root from './routes/root';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, 
+        RouterProvider } from 'react-router-dom';
 
 // Components
+import Home from './Home';
 import ErrorPage from './error-page';
 import Quotes from './quotes/Quotes';
 import Markdown from './markdown/Markdown';
@@ -13,13 +15,13 @@ import Drum from './drum/Drum';
 import Calculator from './calculator/Calculator';
 import Clock from './clock/Clock';
 
-// Routing data
 const router = createBrowserRouter([
   { 
     path: '/', 
     element: <Root />, 
     errorElement: <ErrorPage />,
     children: [
+      { path: '', index:true, element: <Home /> },
       { path: 'quotes', element: <Quotes /> },
       { path: 'markdown', element: <Markdown /> },
       { path: 'drum', element: <Drum /> },
