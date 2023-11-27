@@ -1,10 +1,14 @@
-.quote-wrap{
+.quotes{
   height: calc(100vh - 56px); 
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.quote-wrap #quote-box{
-  max-width: 800px;
+  
+  #quote-box{
+    max-width: 800px;
+  }
+  #author{
+    text-align: right;
+  }
 }
