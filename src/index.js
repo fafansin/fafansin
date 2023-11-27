@@ -1,3 +1,7 @@
+// Import CSS
+// import 'bootstrap/scss/bootstrap.scss';
+import './custom.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -14,6 +18,9 @@ import Markdown from './markdown/Markdown';
 import Drum from './drum/Drum';
 import Calculator from './calculator/Calculator';
 import Clock from './clock/Clock';
+
+
+
 
 const router = createBrowserRouter([
   { 
