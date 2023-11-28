@@ -11,7 +11,7 @@ export default function Markdown (){
   
   return(
     <div className="markdown">
-      <Accordion defaultActiveKey={['0', '1']} alwaysOpen data-bs-theme="dark" className="bg-secondary border">
+      <Accordion defaultActiveKey={['0', '1']} alwaysOpen className="bg-secondary border">
         <Accordion.Item eventKey="0">
           <Accordion.Header>Markdown Editor</Accordion.Header>
           <Accordion.Body>

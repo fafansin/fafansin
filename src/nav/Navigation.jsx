@@ -6,7 +6,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 class Navigation extends React.Component{
   render(){
     return (
-      <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
+      <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand as={Link} to={'/'}>Laviel</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
