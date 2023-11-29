@@ -165,7 +165,8 @@ const Calculator = () => {
   }
 
   return(
-    <div className="calculator-wrap">
+    <>
+      <h1 className="display-4 text-center">Calculator</h1>
       <div className="Calculator border shadow">
         <div className="display-wrap">
           <div id="formula">{ formula }</div>
@@ -191,7 +192,7 @@ const Calculator = () => {
           <Button className="pad" variant="secondary" id="decimal" onClick={onPress} value=".">.</Button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

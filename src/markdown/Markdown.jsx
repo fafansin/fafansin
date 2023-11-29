@@ -11,6 +11,7 @@ export default function Markdown (){
   
   return(
     <div className="markdown">
+      <h1 className="display-4 text-center">Markdown</h1>
       <Accordion defaultActiveKey={['0', '1']} alwaysOpen className="bg-secondary border">
         <Accordion.Item eventKey="0">
           <Accordion.Header>Markdown Editor</Accordion.Header>

@@ -91,7 +91,7 @@ class Clock extends Component{
   render(){
     
     return(
-      <div className="clock-wrap d-flex flex-column align-items-center">
+      <>
         <h1 className="title display-4 text-center">25 + 5 Clock</h1>
         <div className="Clock border shadow">
           <div className="control-wrap d-flex justify-content-around">
@@ -120,7 +120,7 @@ class Clock extends Component{
           </div>
           <audio id="beep" preload="auto" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"></audio>
         </div>
-      </div>
+      </>
     )
   }
 }
