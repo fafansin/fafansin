@@ -4,14 +4,14 @@ import padlist from './padlist.js';
 import './Drum.scss';
 
 export default function Drum() {
-  const [display,setDisplay] = useState('');
+  const [display,setDisplay] = useState('Drum Beat');
   
   function onPress(data){
     setDisplay(data.display);
   }
 
   return (
-    <div className="drum pt-5">
+    <div className="drum">
       <div id="drum-machine" className="machine border shadow">
         <div className="display-wrap">
           <span id="display" className="display-4">{display}</span>

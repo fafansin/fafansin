@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Button } from 'react-bootstrap';
+import './Clock.scss';
 
 class Control extends Component{
   min = 1;
@@ -24,21 +26,21 @@ class Control extends Component{
     const { id, value } = this.props;
     const title = id.charAt(0).toUpperCase() + id.slice(1);
     return(
-      <div className="Control rounded">
+      <div className="Control p-3">
         <h3 id={`${id}-label`}>{title} Length</h3>
         <div className="btn-wrap d-flex justify-content-between align-items-center">
-          <button id={`${id}-decrement`} 
-            className="btn btn-danger"
+          <Button id={`${id}-decrement`} 
+            variant="danger"
             onClick={this.handleClick}>
             &#8595;
-          </button>
+          </Button>
           <h4 id={`${id}-length`} className="value">{value}</h4>
-          <button 
+          <Button 
             id={`${id}-increment`} 
-            className="btn btn-success"
+            variant="success"
             onClick={this.handleClick}>
             &#8593;
-          </button>
+          </Button>
         </div>
       </div>
     )

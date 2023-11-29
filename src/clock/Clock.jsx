@@ -91,33 +91,35 @@ class Clock extends Component{
   render(){
     
     return(
-      <div className="Clock rounded text-center">
-        <h1 className="title">25 + 5 Clock</h1>
-        <div className="control-wrap d-flex justify-content-around">
-          <Control 
-            id="break" 
-            running={this.state.running}
-            value={this.state.breaker}
-            onClick={this.handleControl}
-            />
-          <Control 
-            id="session" 
-            running={this.state.running}
-            value={this.state.session}
-            onClick={this.handleControl}
-            />
+      <div className="clock-wrap d-flex flex-column align-items-center">
+        <h1 className="title display-4 text-center">25 + 5 Clock</h1>
+        <div className="Clock border shadow">
+          <div className="control-wrap d-flex justify-content-around">
+            <Control 
+              id="break" 
+              running={this.state.running}
+              value={this.state.breaker}
+              onClick={this.handleControl}
+              />
+            <Control 
+              id="session" 
+              running={this.state.running}
+              value={this.state.session}
+              onClick={this.handleControl}
+              />
+          </div>
+          <div className="timer-wrap mt-2">
+            <Timer 
+              spent={this.state.spent}
+              session={this.state.session} 
+              breaker={this.state.breaker}
+              isSession={this.state.isSession}
+              onPlayPause={this.handlePlayPause}
+              onReset={this.handleReset}
+              />
+          </div>
+          <audio id="beep" preload="auto" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"></audio>
         </div>
-        <div className="timer-wrap">
-          <Timer 
-            spent={this.state.spent}
-            session={this.state.session} 
-            breaker={this.state.breaker}
-            isSession={this.state.isSession}
-            onPlayPause={this.handlePlayPause}
-            onReset={this.handleReset}
-            />
-        </div>
-        <audio id="beep" preload="auto" src="https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"></audio>
       </div>
     )
   }
