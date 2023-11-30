@@ -1,35 +1,40 @@
 import { useState } from 'react';
 import { marked } from 'marked';
 import initial from './initial.js';
-import { Accordion } from 'react-bootstrap';
+import TitleBar from './TitleBar';
+
 import  "./Markdown.scss";
 
 marked.use({breaks:true})
 
 export default function Markdown (){
-  const [ markup, setMarkup] = useState(initial)
+  const [ markup, setMarkup] = useState(initial);
+  const [ open, setOpen ] = useState(true);
+  
+  function onToggle(data){
+    setOpen(data);
+  }
   
   return(
     <div className="markdown">
       <h1 className="display-4 text-center">Markdown</h1>
-      <Accordion defaultActiveKey={['0', '1']} alwaysOpen className="bg-secondary border">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Markdown Editor</Accordion.Header>
-          <Accordion.Body>
+      <div className="container">
+        <div className="row gx-2">
+          <div className="col-12 col-lg-6">
+            <TitleBar title="Editor" onToggle={onToggle}/>
             <textarea name="editor" 
               id="editor" 
               value={markup}
-              onChange={(event) => setMarkup(event.target.value)}
-              ></textarea>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Markdown Previewer</Accordion.Header>
-          <Accordion.Body>
-          <div id="preview" dangerouslySetInnerHTML={{__html:marked.parse(markup)}}></div>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+              className={`bg-dark text-light ${open ? 'visible' : 'hidden'}`}
+              onChange={(event) => setMarkup(event.target.value)}>
+            </textarea>
+          </div>
+          <div className="col-12 col-lg-6">
+            <TitleBar title="Preview"/>
+            <div id="preview" className=" border py-1 px-3" dangerouslySetInnerHTML={{__html:marked.parse(markup)}}></div>
+          </div>
+        </div>
+        </div>
     </div>
   )
 }

@@ -1,0 +1,14 @@
+@import '../custom.scss';
+
+.TitleBar{
+  background-color: $info;
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p{
+    margin: 0;
+    padding-left: 10px;
+  }
+}
