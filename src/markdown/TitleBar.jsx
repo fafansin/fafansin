@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import './TitleBar.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMaximize } from '@fortawesome/free-solid-svg-icons'
+import { faMinimize } from '@fortawesome/free-solid-svg-icons'
 
 function TitleBar({title, onToggle}) {
   const [isOpen, setIsOpen ] = useState(true);
@@ -15,7 +18,7 @@ function TitleBar({title, onToggle}) {
     <div className="TitleBar">
       <p>{title}</p>
       {onToggle && 
-          <button className="btn btn-outline d-lg-none" onClick={handleClick}>{isOpen ? 'close me' : 'open me'}</button>
+          <button className="btn btn-outline d-lg-none" onClick={handleClick}>{isOpen ? <FontAwesomeIcon icon={faMinimize} /> : <FontAwesomeIcon icon={faMaximize} />}</button>
       }
       
     </div>

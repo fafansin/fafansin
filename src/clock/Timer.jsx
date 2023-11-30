@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faPause } from '@fortawesome/free-solid-svg-icons'
+import { faRepeat } from '@fortawesome/free-solid-svg-icons'
+
 
 class Timer extends Component{
   formatter(n){
@@ -33,12 +38,13 @@ class Timer extends Component{
           <Button id="start_stop" 
             variant="info"
             onClick={onPlayPause}>
-            Play/Pause
+            <FontAwesomeIcon icon={faPlay} />
+            <FontAwesomeIcon icon={faPause} />
           </Button>
           <Button id="reset" 
             variant="secondary"
             onClick={onReset}> 
-            Reset
+            <FontAwesomeIcon icon={faRepeat} />
           </Button>
         </div>
       </div>

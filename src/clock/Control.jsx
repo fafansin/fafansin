@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import './Clock.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpLong } from '@fortawesome/free-solid-svg-icons'
+import { faDownLong } from '@fortawesome/free-solid-svg-icons'
 
 class Control extends Component{
   min = 1;
@@ -31,15 +34,17 @@ class Control extends Component{
         <div className="btn-wrap d-flex justify-content-between align-items-center">
           <Button id={`${id}-decrement`} 
             variant="danger"
+            className="rounded-circle shadow"
             onClick={this.handleClick}>
-            &#8595;
+            <FontAwesomeIcon icon={faDownLong} />
           </Button>
           <h4 id={`${id}-length`} className="value">{value}</h4>
           <Button 
             id={`${id}-increment`} 
             variant="success"
+            className="rounded-circle shadow"
             onClick={this.handleClick}>
-            &#8593;
+            <FontAwesomeIcon icon={faUpLong} />
           </Button>
         </div>
       </div>

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import list from './list.js';
 import './Quotes.scss';
 import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons'
 
 export default function Quote(){
   
@@ -48,7 +50,7 @@ export default function Quote(){
             id="tweet-quote" 
             style={{backgroundColor:color, border:"none"}}
             className="btn btn-primary btn-small">
-              Twitter
+              <FontAwesomeIcon icon={faXTwitter} />
           </a>
         </div>
       </div>
