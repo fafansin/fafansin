@@ -15,7 +15,7 @@ function TitleBar({title, onToggle}) {
     <div className="TitleBar">
       <p>{title}</p>
       {onToggle && 
-          <button className="btn btn-outline" onClick={handleClick}>{isOpen ? 'close me' : 'open me'}</button>
+          <button className="btn btn-outline d-lg-none" onClick={handleClick}>{isOpen ? 'close me' : 'open me'}</button>
       }
       
     </div>
