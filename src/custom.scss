@@ -1,29 +1,16 @@
-// $body-bg: rgb(114, 114, 114);
-$accordion-border-radius:1;
-$border-radius:0;
+// COLORS
 
-// $accordion-bg:#efef;
-// $accordion-button-bg: "primary";
-// $accordion-button-active-bg: pink;
+$primary: #634217;
+$light: whitesmoke;
+$info:#e47025;
+$danger: #73303C;
+$info: #4C6353;
+$secondary: #8C826C;
+$success:#044013;
+$body-bg:$light;
 
+// BORDERS
+$border-radius-sm:2px;
+$border-radius:2px;
 
 @import '~bootstrap/scss/bootstrap.scss';
-// .wrap{
-//   background:yellow;
-// }
-// body{
-//   background-color: rgb(62, 62, 62);
-// }
-// html{
-//   height: 100%;
-//   flex: 1;
-// }
-// body{
-//   min-height: 100vh;
-//   flex: 1;
-// }
-// .container-fluid{
-//   // height: calc(100vh - 56px); 
-//   height: 100%;
-//   background-color: yellow;
-// }

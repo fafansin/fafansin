@@ -11,7 +11,7 @@ class Root extends React.Component{
         <div className="navWrap">
           <Navigation />
         </div>
-        <div id="content" className="d-flex flex-column align-items-center pt-3">
+        <div id="content" className="d-flex flex-column align-items-center pt-3 bg-light">
           <Outlet />
         </div>
       </>
