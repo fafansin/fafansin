@@ -1,3 +1,4 @@
+@import "../custom.scss";
 .markdown{
   #editor{
     width: 100%;
@@ -9,12 +10,27 @@
   }
   
   #preview{
+    background-color: whitesmoke;
     word-wrap: normal;
     width: 100%;
     overflow:hidden;
     
     img{
       max-width: 90%;
+    }
+    pre{
+      background-color: $dark;
+      color:$light;
+      padding:2px;
+    }
+    table{
+      border-style: solid;
+      border-width: 1px;
+      margin: 10px 0;
+
+      th, td{
+        padding:2px;
+      }
     }
   }
   .hidden{

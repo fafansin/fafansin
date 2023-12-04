@@ -16,7 +16,7 @@ export default function Markdown (){
   }
   
   return(
-    <div className="markdown">
+    <div className="markdown container">
       <h1 className="display-4 text-center">Markdown</h1>
       <div className="container">
         <div className="row gx-2">

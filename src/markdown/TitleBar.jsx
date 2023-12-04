@@ -16,7 +16,7 @@ function TitleBar({title, onToggle}) {
   }
   return (
     <div className="TitleBar">
-      <p>{title}</p>
+      <p className="text-light">{title}</p>
       {onToggle && 
           <button className="btn btn-outline d-lg-none" onClick={handleClick}>{isOpen ? <FontAwesomeIcon icon={faMinimize} /> : <FontAwesomeIcon icon={faMaximize} />}</button>
       }
