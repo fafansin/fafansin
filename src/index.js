@@ -18,6 +18,7 @@ import Markdown from './markdown/Markdown';
 import Drum from './drum/Drum';
 import Calculator from './calculator/Calculator';
 import Clock from './clock/Clock';
+import Guess from './guess/Guess';
 
 
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: 'drum', element: <Drum /> },
       { path: 'calculator', element: <Calculator /> },
       { path: 'clock', element: <Clock /> },
+      { path: 'guess', element: <Guess /> },
     ]
   },
 
