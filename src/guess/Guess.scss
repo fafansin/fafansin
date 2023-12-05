@@ -1,0 +1,30 @@
+.guess{
+  width: 350px;
+  background-color: whitesmoke;
+
+  input{
+    width: 80px;
+    height: 80px;
+    border-style: outset;
+    border-width: 10px;
+    border-radius: 50%;
+    background-color: white;
+    text-align: center;
+
+    &:active, &:focus{
+      background-color: green;
+    }
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    appearance: textfield;
+  }
+}
