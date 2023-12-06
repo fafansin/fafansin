@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import "./Guess.scss";
+import Welcome from './Welcome.jsx';
 
 function Guess() {
   const min = 1;
@@ -11,13 +12,9 @@ function Guess() {
   const [ answer, setAnswer ] = useState(null);
   const [ max, setMax ] = useState(100);
   
-  function onStart(event){
-    event.preventDefault();
-    setAnswer(getRandomNumber());
-  }
-
-  function onChange(event){
-    setMax(event.target.value);
+  function handleStart(data){
+    setAnswer(data.rand);
+    setMax(data.max);
   }
 
   function onGuess(event){
@@ -37,33 +34,28 @@ function Guess() {
     setAnswers([...answers, `${entered} - ${stat}`]);
   }
 
-  function getRandomNumber(){
-    return Math.floor(Math.random() * (max-min + 1)) + min;
-  }
-
   return (
     <div className="guess shadow container">
-      <Form onSubmit={onStart}>
-        <Form.Label>Give me a High Number</Form.Label>
-        <Form.Control type="number" name="maximum" value={max} step={1} min={min} onChange={onChange}/>
-        <Button type="submit" variant="primary">Start</Button>
-      </Form>
-      
-      <Form onSubmit={onGuess} className="my-5">
-        <Form.Group>
-          <Form.Label>{`Guess the number between ${min} to ${max}`}</Form.Label>
-          <Form.Control type="text" name="guess" placeholder="Enter Name" />
-          <Form.Text>{display}</Form.Text>
-        </Form.Group>
-      </Form>
-      
-      <div className="attemps">
-        <p>Attempts: {answers.length}</p>
-        <ol>
-          { answers.map((item) => <li key={uuidv4()}>{item} </li>) }
-        </ol>
+      <div className="border bg-primary" > 
+        <Welcome onStart={handleStart} maximum={max}/>
       </div>
-      
+      {answer && (
+        <Form onSubmit={onGuess} className="my-5">
+          <Form.Group>
+            <Form.Label>{`Guess the number between ${min} to ${max}`}</Form.Label>
+            <Form.Control type="text" name="guess" placeholder="Enter Name" />
+            <Form.Text>{display}</Form.Text>
+          </Form.Group>
+        </Form>
+      )}
+      {answers.length > 0 && (
+        <div className="attemps">
+          <p>Attempts: {answers.length}</p>
+          <ol>
+            { answers.map((item) => <li key={uuidv4()}>{item} </li>) }
+          </ol>
+        </div>
+      )}
     </div>
       
   )
