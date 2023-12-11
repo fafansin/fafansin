@@ -4,7 +4,7 @@ import Confetti from 'react-confetti';
 function Splash({total, onAgain, onSettings}) {
   return (
     <Card className="Game border shadow">
-      <Confetti recycle={false} width={window.innerWidth} height={window.innerHeight} numberOfPieces={1000} tweenDuration={8000}/>
+      <Confetti recycle={false} width={window.innerWidth} height={window.innerHeight} gravity={.05} numberOfPieces={1000} tweenDuration={8000}/>
       <Card.Body className="text-center">
         <Card.Title>Congratulations!</Card.Title> 
         <Card.Text>{`You guessed the number in ${total} attempts!`}</Card.Text>
