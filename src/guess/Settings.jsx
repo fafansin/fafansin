@@ -13,16 +13,10 @@ function Settings({minimum=1, maximum=100, onStart}) {
       setErrors(errData);
       return
     }
-    let rand = getRandomNumber();
-    console.log(rand);
-    onStart({rand:rand, max:max, min:min});
+    onStart({max:max, min:min});
 
   }
-
-  function getRandomNumber(){
-    return Math.floor(Math.random() * (max-min + 1)) + min;
-  }
-
+  
   function validation(){
     let ref = null;
     if(max <= min){

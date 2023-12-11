@@ -5,21 +5,19 @@ import Game from './Game.jsx';
 import Splash from './Splash.jsx';
 
 function Guess() {
-  const [ answer, setAnswer ] = useState(null);
   const [ max, setMax ] = useState(null);
   const [ min, setMin ] = useState(null);
   const [ page, setPage ] = useState('settings');
   const [ attempts, setAttempts ] = useState(0);
   
   function handleStart(data){
-    setAnswer(data.rand);
     setMax(data.max);
     setMin(data.min);
     setPage('game');
   }
 
   function onAgain(){
-    setPage('settings');
+    setPage('game');
   }
 
   function onSettings(){
@@ -35,7 +33,7 @@ function Guess() {
 
   return (
     <div className="guess container">
-      {page === 'settings' ? <Settings onStart={handleStart} /> : page === 'game' ? <Game answer={answer} maximum={max} minimum={min} onFinish={onFinish} /> : <Splash onAgain={onAgain} onSettings={onSettings} total={attempts}/> }
+      {page === 'settings' ? <Settings onStart={handleStart} /> : page === 'game' ? <Game maximum={max} minimum={min} onFinish={onFinish} /> : <Splash onAgain={onAgain} onSettings={onSettings} total={attempts}/> }
     </div>
   )
 }

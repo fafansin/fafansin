@@ -1,17 +1,31 @@
-import React, {useState} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
-function Game({minimum=1, maximum=100, answer, onFinish}) {
+function Game({minimum=1, maximum=100, onFinish}) {
   const [ answers, setAnswers ] = useState([]);
   const [ display, setDisplay ] = useState('');
   const [ entered, setEntered ] = useState('');
+  const [ answer, setAnswer ] = useState(null);
+  //
+  const mounted = useRef();
 
+  useEffect(() => {
+    if(!mounted.current){
+      mounted.current = true;
+      setAnswer(Math.floor(Math.random() * (maximum-minimum + 1)) + minimum);
+    }
+  }, [answer, maximum, minimum]);
+  
   function onChange(event){
     setEntered(event.target.value);
   }
+
   function onGuess(event){
     event.preventDefault();
+    if(entered === ''){
+      return
+    }
     let stat;  
     if(answer < entered ){
       stat = 'Too High';
@@ -19,7 +33,7 @@ function Game({minimum=1, maximum=100, answer, onFinish}) {
       stat = 'Too Low';
     }else{
       stat = 'Congrats!';
-      onFinish(answers.length);
+      onFinish(answers.length + 1);
     }
     setDisplay(stat);
     setAnswers([...answers, `${entered} - ${stat}`]);
