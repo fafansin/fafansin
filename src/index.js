@@ -19,6 +19,7 @@ import Drum from './drum/Drum';
 import Calculator from './calculator/Calculator';
 import Clock from './clock/Clock';
 import Guess from './guess/Guess';
+import Dice from './dice/Dice';
 
 
 
@@ -36,8 +37,14 @@ const router = createBrowserRouter([
       { path: 'calculator', element: <Calculator /> },
       { path: 'clock', element: <Clock /> },
       { path: 'guess', element: <Guess /> },
-    ]
+      { path: 'dice', element: <Dice /> },
+    ],
   },
+  // {
+  //   path: '/dice', 
+  //   element: <Dice />, 
+  //   errorElement: <ErrorPage />,
+  // }
 
 ])
 
