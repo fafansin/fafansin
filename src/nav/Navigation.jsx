@@ -19,6 +19,7 @@ class Navigation extends React.Component{
               <Nav.Link as={Link} to={'clock'}>Clock</Nav.Link>
               <Nav.Link as={Link} to={'guess'}>Guessing Game</Nav.Link>
               <Nav.Link as={Link} to={'dice'}>Dice Roll</Nav.Link>
+              <Nav.Link as={Link} to={'boxes'}>Colored Boxes</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

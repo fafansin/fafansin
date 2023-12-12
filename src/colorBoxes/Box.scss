@@ -1,0 +1,9 @@
+.Box{
+  width:200px;
+  height:200px;
+  cursor:pointer;
+
+  &:hover{
+    opacity: .9;
+  }
+}
