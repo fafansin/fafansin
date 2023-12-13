@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import './Clock.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpLong } from '@fortawesome/free-solid-svg-icons'
-import { faDownLong } from '@fortawesome/free-solid-svg-icons'
+import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons'
 
 class Control extends Component{
   min = 1;
