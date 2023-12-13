@@ -21,6 +21,7 @@ import Clock from './clock/Clock';
 import Guess from './guess/Guess';
 import Dice from './dice/Dice';
 import Boxes from './colorBoxes/Boxes';
+import Board from './lightsOut/Board';
 
 
 
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: 'guess', element: <Guess /> },
       { path: 'dice', element: <Dice /> },
       { path: 'boxes', element: <Boxes /> },
+      { path: 'lightsout', element: <Board /> },
     ],
   },
   // {
