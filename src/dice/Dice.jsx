@@ -1,29 +1,25 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Die from './Die';
 import Button from 'react-bootstrap/Button';
 
 function Dice({nDices=2}) {
-  const [ state, setState] = useState({faces:[], rolling:false});
-  const mounted = useRef();
+  const [ state, setState] = useState({faces:getFaces(), rolling:false});
   
-  useEffect(() => {
-    if(!mounted.current){
-      mounted.current = true;
-      rollDice();
-    }
-  });
-
-  function rollDice(){
+  function getFaces(){
     const ref = [];
     for(let i = 0; i < nDices; i++){
       ref.push(getRandom());
     }
+    return ref;
+  }
+  function rollDice(){
+    
     setState({...state, rolling:true});
     
     setTimeout(() => {
-      setState({faces:ref, rolling:false})
-    }, 1000, ref)
+      setState({faces:getFaces(), rolling:false})
+    }, 1000)
   }
   function getRandom(){
     return Math.floor(Math.random() * 6);
