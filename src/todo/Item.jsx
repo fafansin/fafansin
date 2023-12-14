@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Button  from 'react-bootstrap/Button';
+import Form  from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil, faTrash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
 function Item({id, todo, save, remove}) {
@@ -15,6 +16,7 @@ function Item({id, todo, save, remove}) {
     setEdit(!edit);
   }
   function handleSave(event){
+    event.preventDefault();
     save(id, todoItem);
     setEdit(false);
   }
@@ -24,24 +26,21 @@ function Item({id, todo, save, remove}) {
   }
 
   return (
-    <div className="item my-3">
+    <div className="Item my-1 px-4 py-1">
       {!edit ? (
-        <div className="displayForm d-flex justify-content-between align-items-end border">
-          <div>{todoItem}</div>
-          <div d-flex gap-2>
-            <Button className="mx-1" onClick={handleEdit}><FontAwesomeIcon icon={faPencil} /></Button>
-            <Button onClick={handleRemove}><FontAwesomeIcon icon={faTrash} /></Button>
+        <div className="displayForm d-flex justify-content-between align-items-center">
+          <div>{todo}</div>
+          <div className="d-flex">
+            <Button variant="link" onClick={handleEdit}><FontAwesomeIcon icon={faPencil} /></Button>
+            <Button variant="link" onClick={handleRemove}><FontAwesomeIcon icon={faTrash} /></Button>
           </div>
         </div>
       ) : (
-        <div className="editForm d-flex justify-content-between align-items-end border">
-          <input type="text" name="todo" id="todo" value={todoItem} onChange={handleChange} />
-          <Button onClick={handleSave}><FontAwesomeIcon icon={faFloppyDisk} flip /></Button>
-        </div>
+        <Form className="editForm d-flex justify-content-start align-items-center gap-1" onSubmit={handleSave}>
+          <Form.Control name="todo" id="todo" value={todoItem} onChange={handleChange}></Form.Control>
+          <Button type="submit" variant="outline-light" className="bg-primary">Save</Button>
+        </Form>
       )}
-      
-      
-      
     </div>
   )
 }

@@ -13,9 +13,12 @@ function AddItem({handleAdd}) {
     setTodo(event.target.value);
   }
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Control type="text" onChange={handleChange} value={todo}></Form.Control>
-      <Button type="submit" variant="primary">Add</Button>
+    <Form onSubmit={handleSubmit} className="p-4">
+      <h6>New Todo</h6>
+      <Form.Group className="d-flex gap-2">
+        <Form.Control type="text" onChange={handleChange} value={todo}></Form.Control>
+        <Button type="submit" variant="outline-light">Add</Button>
+      </Form.Group>
     </Form>
   )
 }
