@@ -23,6 +23,7 @@ import Dice from './dice/Dice';
 import Boxes from './colorBoxes/Boxes';
 import Board from './lightsOut/Board';
 import Todo from './todo/Todo';
+import Cards from './cards/Cards';
 
 
 const router = createBrowserRouter([
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: 'boxes', element: <Boxes /> },
       { path: 'lightsout', element: <Board /> },
       { path: 'todo', element: <Todo /> },
+      { path: 'cards', element: <Cards /> },
     ],
   },
   // {

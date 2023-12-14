@@ -22,6 +22,7 @@ class Navigation extends React.Component{
               <Nav.Link as={Link} to={'boxes'}>Colored Boxes</Nav.Link>
               <Nav.Link as={Link} to={'lightsout'}>Lights Out</Nav.Link>
               <Nav.Link as={Link} to={'todo'}>Todo List</Nav.Link>
+              <Nav.Link as={Link} to={'cards'}>Cards</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
