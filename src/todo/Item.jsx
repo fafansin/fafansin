@@ -29,16 +29,16 @@ function Item({id, todo, save, remove}) {
     <div className="Item my-1 px-4 py-1">
       {!edit ? (
         <div className="displayForm d-flex justify-content-between align-items-center">
-          <div>{todo}</div>
-          <div className="d-flex">
-            <Button variant="link" onClick={handleEdit}><FontAwesomeIcon icon={faPencil} /></Button>
-            <Button variant="link" onClick={handleRemove}><FontAwesomeIcon icon={faTrash} /></Button>
+          <p>{todo}</p>
+          <div>
+            <Button variant="link" className="text-light" onClick={handleEdit}><FontAwesomeIcon icon={faPencil} /></Button>
+            <Button variant="link" className="text-light" onClick={handleRemove}><FontAwesomeIcon icon={faTrash} /></Button>
           </div>
         </div>
       ) : (
         <Form className="editForm d-flex justify-content-start align-items-center gap-1" onSubmit={handleSave}>
           <Form.Control name="todo" id="todo" value={todoItem} onChange={handleChange}></Form.Control>
-          <Button type="submit" variant="outline-light" className="bg-primary">Save</Button>
+          <Button type="submit" variant="outline-light">Save</Button>
         </Form>
       )}
     </div>
