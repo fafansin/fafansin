@@ -24,6 +24,7 @@ import Boxes from './colorBoxes/Boxes';
 import Board from './lightsOut/Board';
 import Todo from './todo/Todo';
 import Cards from './cards/Cards';
+import JokeList from './jokes/JokeList';
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
       { path: 'lightsout', element: <Board /> },
       { path: 'todo', element: <Todo /> },
       { path: 'cards', element: <Cards /> },
+      { path: 'jokes', element: <JokeList /> },
     ],
   },
   // {
