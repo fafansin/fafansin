@@ -45,7 +45,7 @@ function Cards() {
     <div className="Cards text-center border shadow py-3">
       <h1 className="text-center">Card Dealer</h1>
       <div className="d-flex gap-3 justify-content-center">
-        <Button variant="primary" onClick={getCard} disabled={state.loading}>GIMME A CARD!</Button>
+        <Button variant="primary" onClick={getCard} disabled={state.loading || state.remaining < 1}>GIMME A CARD!</Button>
       </div>
       <div className="pile mt-5">
         {state.cards.map((card) => (
