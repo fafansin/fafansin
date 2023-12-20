@@ -53,7 +53,7 @@ function JokeList({nJokes=10}) {
 
       </div>
       <ul className="right-panel shadow">
-        {state.loading ? (<div className="spinner"><FontAwesomeIcon icon={faSpinner} spin size="2xl" /></div>) : 
+        {state.loading ? (<div className="spinner"><FontAwesomeIcon icon={faSpinner} spin size="2xl" /><p>Loading...</p></div>) : 
         state.jokes.map(joke => <li key={joke.id}><Joke id={joke.id} joke={joke.joke} score={joke.score} handleVote={vote}/></li>)
         }
       </ul>
