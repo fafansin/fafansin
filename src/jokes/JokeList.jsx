@@ -9,6 +9,8 @@ import { faFaceLaugh, faSpinner } from '@fortawesome/free-solid-svg-icons';
 function JokeList({nJokes=10}) {
   const [ state, setState ] = useState({loading:false, jokes:JSON.parse(window.localStorage.getItem('jokes') || "[]")})
   const mounted = useRef();
+  const seenJokes = new Set(state.jokes.map(j => (j.joke)));
+
   useEffect(()=>{
     if(!mounted.current){
       mounted.current = true;
@@ -30,7 +32,8 @@ function JokeList({nJokes=10}) {
     const jokes = [];
     while(jokes.length < nJokes){
       const res = await axios.get('https://icanhazdadjoke.com/', {headers:{Accept:'application/json'}});
-      if(!jokes.find((element) => element.id === res.data.id)){
+      // if(!jokes.find((element) => element.id === res.data.id)){
+      if(!seenJokes.has(res.data.joke)){
         jokes.push({id:res.data.id, joke:res.data.joke, score:0});
       }
     }
