@@ -2,6 +2,13 @@
 .JokeList{
   $shadow-custom:-2px 4px 26px -6px rgba(0,0,0,0.66);
   
+  .my-shadow{
+    box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+    -webkit-box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+  }
+  
+  
   background-color: rgb(218, 218, 218);
   display:flex;
   justify-content: center;
@@ -67,7 +74,7 @@
         padding: 10px;
 
         .score{
-          border:1px solid grey;
+          border:2px solid $orange;
           height: 40px;
           width: 40px;
           border-radius: 50%;
@@ -77,6 +84,7 @@
         }
         .rate{
           font-size: 2.5rem;
+          border-radius: 50%;
           .fa-face-grin-squint-tears{
             color:$purple;
           }

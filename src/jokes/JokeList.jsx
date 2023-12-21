@@ -50,7 +50,7 @@ function JokeList({nJokes=10}) {
       <div className="left-panel">
         <h1 className="h1">Dad Jokes</h1>
         <div className="face">
-          <FontAwesomeIcon icon={faFaceLaugh} />
+          <FontAwesomeIcon bounce icon={faFaceLaugh} />
         </div>
         <Button onClick={moreJokes} variant="info">More Jokes</Button>
 
