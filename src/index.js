@@ -26,6 +26,7 @@ import Todo from './todo/Todo';
 import Cards from './cards/Cards';
 import JokeList from './jokes/JokeList';
 import Dogs from './dogs/Dogs';
+import Dog from './dogs/Dog';
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
   {
     path: '/dogs', 
     element: <Dogs />, 
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/dogs/:dogId', 
+    element: <Dog />, 
     errorElement: <ErrorPage />,
   }
 
