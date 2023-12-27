@@ -3,6 +3,7 @@ import ColorBox from './ColorBox';
 import { v4 as uuidv4 } from 'uuid';
 import './Palette.scss';
 
+
 function Palette({data}) {
   return (
     <div className="Palette">
