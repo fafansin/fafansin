@@ -1,9 +1,9 @@
 import React from 'react';
 import ColorBox from './ColorBox';
 import { v4 as uuidv4 } from 'uuid';
+import './Palette.scss';
 
 function Palette({data}) {
-  console.log(data.colors)
   return (
     <div className="Palette">
       <div className="Palette-colors">

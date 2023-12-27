@@ -5,7 +5,7 @@ import Palette from './Palette';
 function Palettes() {
   return (
     <div className="Palettes">
-      <Palette data={seedColors[3]} />
+      <Palette data={seedColors[0]} />
     </div>
   )
 }

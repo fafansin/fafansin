@@ -1,4 +1,4 @@
-export default [
+module.exports = [
   {
     paletteName: "Material UI Colors",
     id: "material-ui-colors",

@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import './ColorBox.scss';
 
 function ColorBox({color, name}) {
   return (
-    <div className="ColorBox" style={{backgroundColor:color, width:"100px", height:"100px"}}>
+    <div className="ColorBox" style={{backgroundColor:color}}>
       <span>{name}</span>
       <span>MORE</span>
     </div>
