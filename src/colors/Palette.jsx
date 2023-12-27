@@ -6,15 +6,21 @@ import PaletteHeader from './PaletteHeader';
 
 function Palette({palette}) {
   const [ level, setLevel ] = useState(500);
+  const [ format, setFormat ] = useState('hex');
 
   function handleChangeLevel(event){
     setLevel(event.target.value);
   }
+
+  function handleChangeFormat(event){
+    setFormat(event.target.value);
+  }
+
   return (
     <div className="Palette">
-      <PaletteHeader level={level} changeLevel={handleChangeLevel}/>
+      <PaletteHeader level={level} changeLevel={handleChangeLevel} format={format} changeFormat={handleChangeFormat}/>
       <div className="Palette-colors">
-        {palette.colors[level].map(color => (<ColorBox key={uuidv4()} color={color.hex} name={color.name} />))}
+        {palette.colors[level].map(color => (<ColorBox key={uuidv4()} color={color[format]} name={color.name} />))}
       </div>
     </div>
   )

@@ -2,6 +2,7 @@ import React from 'react';
 import seedColors from './seedColors.js';
 import Palette from './Palette';
 import { generatePalette } from './colorHelpers';
+import '@fontsource/roboto';
 
 function Palettes() {
   return (

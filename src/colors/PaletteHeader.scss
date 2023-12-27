@@ -9,7 +9,7 @@
     padding: 0 13px;
     font-size: 22px;
     background-color: #eceff1;
-    // font-family: Roboto;
+    font-family: Roboto;
     height: 100%;
     display: flex;
     align-items: center;
@@ -19,10 +19,16 @@
       color: #000;
     }
   }
-  .slider{
-    width: 340px;
-    margin: 0 10px;
-    display: inline-block;
+  .slider-container{
+    display: flex;
+    align-items: center;
+
+    .slider{
+      width: 340px;
+      margin: 0 10px;
+      display: inline-block;
+    }
   }
+  
 
 }
