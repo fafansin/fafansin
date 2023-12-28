@@ -19,6 +19,11 @@
       color: #000;
     }
   }
+  .wrap{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   .slider-container{
     display: flex;
     align-items: center;
@@ -29,6 +34,4 @@
       display: inline-block;
     }
   }
-  
-
 }
