@@ -22,6 +22,10 @@ function Palette({palette}) {
       <div className="Palette-colors">
         {palette.colors[level].map(color => (<ColorBox key={uuidv4()} color={color[format]} name={color.name} />))}
       </div>
+      <footer className="Palette-footer">
+        {palette.paletteName}
+        <span className="emoji">{palette.emoji}</span>
+      </footer>
     </div>
   )
 }
