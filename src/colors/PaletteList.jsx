@@ -1,15 +1,20 @@
 import React from 'react';
 import seedColors from './seedColors.js';
-import { Link } from 'react-router-dom';
+import MiniPalettes from './MiniPalettes';
+import './PaletteList.scss';
 
 function PaletteList() {
   
   return (
     <div className="PaletteList">
-      <h1>React Colors</h1>
-      <ul>
-        {seedColors.map(palette => (<li key={palette.id}><Link to={`/palettes/${palette.id}`}>{palette.paletteName}</Link></li>))}
-      </ul>
+      <div className="container">
+        <nav className="nav">
+          <h1>React Colors</h1>
+        </nav>
+        <div className="palettes">
+          {seedColors.map(palette => ( <MiniPalettes key={palette.id} {...palette} />))}
+        </div>
+      </div>
     </div>
   )
 }
