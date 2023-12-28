@@ -8,8 +8,8 @@ function Palette({palette}) {
   const [ level, setLevel ] = useState(500);
   const [ format, setFormat ] = useState('hex');
 
-  function handleChangeLevel(event){
-    setLevel(event.target.value);
+  function handleChangeLevel(value){
+    setLevel(value);
   }
 
   function handleChangeFormat(value){

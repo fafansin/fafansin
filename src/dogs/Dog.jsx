@@ -6,7 +6,7 @@ import dogsData from './data.js';
 import { v4 as uuidv4 } from 'uuid';
 
 function Dog() {
-  const { dogId }= useParams();
+  const { dogId } = useParams();
   const dogData = dogsData.find((element) => element.name === dogId)
   
   return (

@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Slider from '@mui/material/Slider';
+import { Link } from 'react-router-dom';
 import './PaletteHeader.scss';
 
 function PaletteHeader({level, changeLevel, format, changeFormat}) {
@@ -17,20 +18,32 @@ function PaletteHeader({level, changeLevel, format, changeFormat}) {
   function handleClose(event){
     setOpen(false);
   }
+  function handleSlide(event){
+    changeLevel(event.target.value);
+
+
+  }
 
   return (
     <header className="PaletteHeader">
       <div className="logo">
         <AdUnitsIcon/>
-        <a href="/">reactcolorpicker</a>
+        <Link to='/palettes'>reactcolorpicker</Link>
       </div>
       <div className="wrap">
         <div className="slider-container">
           <span>Level: {level}</span>
-          <Slider defaultValue={level} marks={true} className="slider" aria-label="color level" min={100} max={900} step={100} onChange={changeLevel}/>
+          <Slider value={level} 
+            id="levelSlide"
+            name="levelSlide"
+            marks={true} 
+            className="slider" 
+            aria-label="color level" 
+            min={100} max={900} step={100} 
+            onChange={handleSlide}/>
         </div>
         <div className="select-container">
-          <Select name="format" onChange={handleFormatChange} label="Format" value={format}>
+          <Select name="format" variant="standard" onChange={handleFormatChange} label="Format" value={format}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
             <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0)</MenuItem>

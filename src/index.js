@@ -28,6 +28,7 @@ import JokeList from './jokes/JokeList';
 import Dogs from './dogs/Dogs';
 import Dog from './dogs/Dog';
 import Palettes from './colors/Palettes';
+import PaletteList from './colors/PaletteList';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/palettes', 
+    element: <PaletteList />, 
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/palettes/:id', 
     element: <Palettes />, 
     errorElement: <ErrorPage />,
   }
