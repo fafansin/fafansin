@@ -12,8 +12,8 @@ function Palette({palette}) {
     setLevel(event.target.value);
   }
 
-  function handleChangeFormat(event){
-    setFormat(event.target.value);
+  function handleChangeFormat(value){
+    setFormat(value);
   }
 
   return (
