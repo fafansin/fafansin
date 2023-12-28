@@ -29,6 +29,7 @@ import Dogs from './dogs/Dogs';
 import Dog from './dogs/Dog';
 import Palettes from './colors/Palettes';
 import PaletteList from './colors/PaletteList';
+import SingleColorPalette from './colors/SingleColorPalette';
 
 
 const router = createBrowserRouter([
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/palettes/:paletteId/:colorId', 
-    element: <h1>Single Color</h1>, 
+    element: <SingleColorPalette />, 
     errorElement: <ErrorPage />,
   }
 
