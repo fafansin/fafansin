@@ -20,7 +20,13 @@ function Palette({palette}) {
     <div className="Palette">
       <PaletteHeader level={level} changeLevel={handleChangeLevel} format={format} changeFormat={handleChangeFormat}/>
       <div className="Palette-colors">
-        {palette.colors[level].map(color => (<ColorBox key={uuidv4()} color={color[format]} name={color.name} />))}
+        {palette.colors[level].map(color => (
+            <ColorBox key={uuidv4()} 
+              paletteId={palette.id}
+              colorId={color.id}
+              color={color[format]} 
+              name={color.name} />
+          ))}
       </div>
       <footer className="Palette-footer">
         {palette.paletteName}

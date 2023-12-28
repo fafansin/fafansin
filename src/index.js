@@ -72,6 +72,11 @@ const router = createBrowserRouter([
     path: '/palettes/:id', 
     element: <Palettes />, 
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/palettes/:paletteId/:colorId', 
+    element: <h1>Single Color</h1>, 
+    errorElement: <ErrorPage />,
   }
 
 ])
