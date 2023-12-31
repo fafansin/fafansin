@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: flex-start;
   height: 6vh;
+  align-items: stretch;
 
   .logo{
     margin-right: 15px;
@@ -21,7 +22,7 @@
   }
   .wrap{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
   }
   .slider-container{
@@ -33,5 +34,8 @@
       margin: 0 10px;
       display: inline-block;
     }
+  }
+  .select-container{
+    align-self: center;
   }
 }

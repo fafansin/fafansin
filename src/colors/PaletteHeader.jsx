@@ -24,31 +24,34 @@ function PaletteHeader({level, changeLevel, format, changeFormat, showLevel=true
 
   return (
     <header className="PaletteHeader">
-      <div className="logo">
-        <AdUnitsIcon/>
-        <Link to='/palettes'>reactcolorpicker</Link>
-      </div>
       <div className="wrap">
-        <div className="slider-container" style={{visibility:showLevel ? "visibile" : "hidden"}}>
-          <span>Level: {level}</span>
-          <Slider value={level} 
-            id="levelSlide"
-            name="levelSlide"
-            marks={true} 
-            className="slider" 
-            aria-label="color level" 
-            min={100} max={900} step={100} 
-            onChange={handleSlide}/>
+        <div className="logo">
+          <AdUnitsIcon/>
+          <Link to='/palettes'>reactcolorpicker</Link>
         </div>
+        {showLevel && (
+          <div className="slider-container">
+            <span>Level: {level}</span>
+            <Slider value={level} 
+              id="levelSlide"
+              name="levelSlide"
+              marks={true} 
+              className="slider" 
+              aria-label="color level" 
+              min={100} max={900} step={100} 
+              onChange={handleSlide}/>
+          </div>
+        )}
         
-        <div className="select-container">
-          <Select name="format" variant="standard" onChange={handleFormatChange} label="Format" value={format}>
-            <MenuItem value="hex">HEX - #ffffff</MenuItem>
-            <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
-            <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0)</MenuItem>
-          </Select>
-        </div>
+      </div>  
+      <div className="select-container">
+        <Select name="format" variant="standard" onChange={handleFormatChange} label="Format" value={format}>
+          <MenuItem value="hex">HEX - #ffffff</MenuItem>
+          <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
+          <MenuItem value="rgba">RGBA - rgba(255,255,255,1.0)</MenuItem>
+        </Select>
       </div>
+      
       <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
           Format Changed!
