@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ColorBox from './ColorBox';
 import { v4 as uuidv4 } from 'uuid';
 import PaletteHeader from './PaletteHeader';
+import PaletteFooter from './PaletteFooter';
 import './Palette.scss';
 
 function Palette({palette}) {
@@ -28,10 +29,7 @@ function Palette({palette}) {
               name={color.name} />
           ))}
       </div>
-      <footer className="Palette-footer">
-        {palette.paletteName}
-        <span className="emoji">{palette.emoji}</span>
-      </footer>
+      <PaletteFooter paletteName={palette.paletteName} emoji={palette.emoji}/>
     </div>
   )
 }
