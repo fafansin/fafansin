@@ -8,6 +8,9 @@ function ColorBox({color, name, colorId, paletteId, showMore=true}) {
   
   function onCopy(event){
     setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
   }
 
   return (
