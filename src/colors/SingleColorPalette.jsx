@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PaletteHeader from './PaletteHeader';
 import PaletteFooter from './PaletteFooter';
 import ColorBox from './ColorBox';
+import { Link } from 'react-router-dom';
 
 function SingleColorPalette() {
   const { paletteId, colorId } = useParams();
@@ -25,7 +26,7 @@ function SingleColorPalette() {
       for(let key in palette.colors){
         referrer.push(palette.colors[key].find((color) => (color.id === colorId)))
       }
-      setPaletteData({palette:pdd, shades:referrer});
+      setPaletteData({palette:pdd, shades:referrer.splice(1)});
 
     }
   },[paletteId, colorId])
@@ -35,13 +36,24 @@ function SingleColorPalette() {
   }
 
   return (
-    <div className="Palette">
+    <div className="SingleColorPalette Palette">
       <PaletteHeader showLevel={false} format={format} changeFormat={handleChangeFormat}/>
       <div className="Palette-colors">
         {paletteData.shades.map(color => (
-          <ColorBox className="box" showMore={false} key={uuidv4()} color={color[format]} name={color.name} colorId={color.id} paletteId={paletteId} />
-          // <div className="box" key={uuidv4()} style={{backgroundColor:color.hex}}>{color.name}</div>
+          <ColorBox className="box" 
+              showMore={false} 
+              key={uuidv4()} 
+              color={color[format]} 
+              name={color.name} 
+              colorId={color.id} 
+              paletteId={paletteId} />
         ))}
+        <div className="ColorBox go-back">
+          {/* <Link to={`/palettes/${paletteId}/${colorId}`} onClick={event => event.stopPropagation()}>
+            <span className="see-more">MORE</span>
+          </Link> */}
+          <Link className="back-button" to={`/palettes/${paletteId}`}>Go Back</Link>
+        </div>
       </div>
       <PaletteFooter paletteName={paletteData.palette.paletteName} emoji={paletteData.palette.emoji} />
     </div>
