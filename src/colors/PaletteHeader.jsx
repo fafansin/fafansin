@@ -8,7 +8,7 @@ import Slider from '@mui/material/Slider';
 import { Link } from 'react-router-dom';
 import './PaletteHeader.scss';
 
-function PaletteHeader({level, changeLevel, format, changeFormat}) {
+function PaletteHeader({level, changeLevel, format, changeFormat, showLevel=true}) {
   const [ open, setOpen ] = useState(false);
   
   function handleFormatChange(event){
@@ -20,8 +20,6 @@ function PaletteHeader({level, changeLevel, format, changeFormat}) {
   }
   function handleSlide(event){
     changeLevel(event.target.value);
-
-
   }
 
   return (
@@ -31,7 +29,7 @@ function PaletteHeader({level, changeLevel, format, changeFormat}) {
         <Link to='/palettes'>reactcolorpicker</Link>
       </div>
       <div className="wrap">
-        <div className="slider-container">
+        <div className="slider-container" style={{visibility:showLevel ? "visibile" : "hidden"}}>
           <span>Level: {level}</span>
           <Slider value={level} 
             id="levelSlide"
@@ -42,6 +40,7 @@ function PaletteHeader({level, changeLevel, format, changeFormat}) {
             min={100} max={900} step={100} 
             onChange={handleSlide}/>
         </div>
+        
         <div className="select-container">
           <Select name="format" variant="standard" onChange={handleFormatChange} label="Format" value={format}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>

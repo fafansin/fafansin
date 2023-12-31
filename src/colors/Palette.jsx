@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import ColorBox from './ColorBox';
 import { v4 as uuidv4 } from 'uuid';
-import './Palette.scss';
 import PaletteHeader from './PaletteHeader';
+import './Palette.scss';
 
 function Palette({palette}) {
   const [ level, setLevel ] = useState(500);
