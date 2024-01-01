@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import DraggableColorBox from './DraggableColorBox';
 //
 import { Sketch } from '@uiw/react-color';
 //
@@ -22,7 +23,8 @@ const drawerWidth = 400;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
+    height: "calc(100vh - 64px)",
+    // padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -137,9 +139,7 @@ function PaletteNew() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <ul>
-          {colors.map((item) => (<li key={item} style={{backgroundColor:item}}>{item}</li>))}
-        </ul>
+        {colors.map((color) => (<DraggableColorBox key={color} color={color} />))}
       </Main>
     </Box>
   );
