@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorBox from './DraggableColorBox';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 //
 import { Sketch } from '@uiw/react-color';
 //
@@ -71,7 +72,12 @@ function PaletteNew() {
   
   const [open, setOpen] = useState(true);
   const [hex, setHex] = useState("light-blue");
-  const [colors, setColors] = useState(["purple", 'teal']);
+  const [colors, setColors] = useState([]);
+  const [colorName, setColorName] = useState('');
+  
+  const handleColorNameChange = (event) => {
+    setColorName(event.target.value);
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -86,7 +92,9 @@ function PaletteNew() {
   }
 
   const addNewColor = (event) => {
-    setColors([...colors, hex])
+    console.log('before submit')
+    // console.log()
+    setColors([...colors, {color:hex, name:colorName}]);
   }
 
   return (
@@ -134,12 +142,24 @@ function PaletteNew() {
           <Button variant="contained" color="primary">Random Color</Button>
         </div>
         <Sketch color={hex} onChange={handleColorChange}/>
-        <Button variant="contained" color="primary" sx={{backgroundColor:hex}} onClick={addNewColor}>Add Color</Button>
+        <ValidatorForm
+          // ref="form"
+          onSubmit={addNewColor}
+          onError={(errors => console.log(errors))}>
+            <TextValidator
+              label="Color Name"
+              onChange={handleColorNameChange}
+              value={colorName}
+              validators={['required']}
+              errorMessages={['please input color name']}
+            />
+          <Button type="submit" variant="contained" color="primary" sx={{backgroundColor:hex}}>Add Color</Button>
+        </ValidatorForm>
 
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colors.map((color) => (<DraggableColorBox key={color} color={color} />))}
+        {colors.map((color) => (<DraggableColorBox key={color.name} {...color} />))}
       </Main>
     </Box>
   );

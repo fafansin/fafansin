@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 
-const DraggableBox = styled('div', {name:"astig"})(({color}) => ({
+const DraggableBox = styled('div')(({color}) => ({
   width: "20%",
   height: "25%",
   margin: "0 auto",
@@ -12,10 +12,11 @@ const DraggableBox = styled('div', {name:"astig"})(({color}) => ({
   backgroundColor: color
 }));
 
-function DragableColorBox({color}) {
+function DragableColorBox({color, name}) {
   return (
-    <DraggableBox color={color}/>
-    // <div className="DragableColorBox" style={{backgroundColor:color}}>{color}</div>
+    <DraggableBox color={color}>
+      {name}
+    </DraggableBox>
   )
 }
 
