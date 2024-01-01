@@ -30,6 +30,7 @@ import Dog from './dogs/Dog';
 import Palettes from './colors/Palettes';
 import PaletteList from './colors/PaletteList';
 import SingleColorPalette from './colors/SingleColorPalette';
+import PaletteNew from './colors/PaletteNew';
 
 
 const router = createBrowserRouter([
@@ -67,6 +68,12 @@ const router = createBrowserRouter([
   {
     path: '/palettes', 
     element: <PaletteList />, 
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/palettes/new', 
+    exact: true,
+    element: <PaletteNew />, 
     errorElement: <ErrorPage />,
   },
   {
