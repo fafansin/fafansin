@@ -68,7 +68,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function PaletteNew() {
   
   const [open, setOpen] = useState(true);
-  const [hex, setHex] = useState("#fff");
+  const [hex, setHex] = useState("light-blue");
+  const [colors, setColors] = useState(["purple", 'teal']);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -77,6 +78,14 @@ function PaletteNew() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleColorChange = (color) => {
+    setHex(color.hex);
+  }
+
+  const addNewColor = (event) => {
+    setColors([...colors, hex])
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -122,13 +131,15 @@ function PaletteNew() {
           <Button variant="contained" color="secondary">Clear Palette</Button>
           <Button variant="contained" color="primary">Random Color</Button>
         </div>
-        <Sketch color={hex} onChange={(color) => {setHex(color.hex);}}/>
-        <Button variant="contained" color="primary">Add Color</Button>
+        <Sketch color={hex} onChange={handleColorChange}/>
+        <Button variant="contained" color="primary" sx={{backgroundColor:hex}} onClick={addNewColor}>Add Color</Button>
 
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        
+        <ul>
+          {colors.map((item) => (<li key={item} style={{backgroundColor:item}}>{item}</li>))}
+        </ul>
       </Main>
     </Box>
   );
