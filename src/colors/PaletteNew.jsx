@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorBox from './DraggableColorBox';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import {useNavigate } from 'react-router-dom';
 //
 import { Sketch } from '@uiw/react-color';
 //
@@ -69,9 +70,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 //
 
 function PaletteNew() {
-  const [ state, setState ] = useState({colorName:'', colors:[{color:'green', name:'green'}]})
+  const [ state, setState ] = useState({paletteName:'', colorName:'', colors:[{color:'green', name:'green'}]})
   const [ open, setOpen ] = useState(true);
   const [ hex, setHex ] = useState("magenta");
+  //
+  const navigate = useNavigate();
 
   
   useEffect(() => {
@@ -85,8 +88,8 @@ function PaletteNew() {
 
   })
   
-  const handleColorNameChange = (event) => {
-    setState({...state, colorName:event.target.value});
+  const handleChange = (event) => {
+    setState({...state, [event.target.name]:event.target.value});
   }
 
   const handleDrawerOpen = () => {
@@ -105,10 +108,22 @@ function PaletteNew() {
     setState({colorName:'', colors:[...state.colors, {color:hex, name:state.colorName}]})
   }
 
+  const savePalette = (event) => {
+    console.log("SAVE ME!");
+    const newPalette = {
+      paletteName: state.paletteName,
+      id: state.paletteName.toLowerCase().replace(/ /g, "-"),
+      colors: state.colors
+    }
+    console.log(newPalette);
+    // I should be handling the saving here
+    navigate('/palettes')
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="default">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -122,6 +137,12 @@ function PaletteNew() {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <ValidatorForm onSubmit={savePalette} style={{display:"flex"}}>
+            <TextValidator label="Palette Name" name="paletteName" onChange={handleChange} value={state.paletteName}/>
+            <Button type="submit" variant="contained" color="primary">Save Palette</Button>
+          </ValidatorForm>
+          
+          
         </Toolbar>
       </AppBar>
       <Drawer
@@ -156,7 +177,8 @@ function PaletteNew() {
           onError={(errors => console.log("DEFAULT", errors))}>
             <TextValidator
               label="Color Name"
-              onChange={handleColorNameChange}
+              name="colorName"
+              onChange={handleChange}
               value={state.colorName}
               validators={['required', 'isColorNameUnique', 'isColorUnique']}
               errorMessages={['Please input Color Name', 'Color Name Already Exists', 'Color already used']}
