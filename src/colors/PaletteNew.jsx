@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -69,14 +69,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 //
 
 function PaletteNew() {
+  const [ state, setState ] = useState({colorName:'', colors:[{color:'green', name:'green'}]})
+  const [ open, setOpen ] = useState(true);
+  const [ hex, setHex ] = useState("magenta");
+
   
-  const [open, setOpen] = useState(true);
-  const [hex, setHex] = useState("light-blue");
-  const [colors, setColors] = useState([]);
-  const [colorName, setColorName] = useState('');
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
+      return state.colors.every(({name}) => name.toLowerCase() !== value.toLowerCase());
+    });
+
+    ValidatorForm.addValidationRule('isColorUnique', (value) => {
+      return state.colors.every(({color}) => color !== hex);
+    });
+
+  })
   
   const handleColorNameChange = (event) => {
-    setColorName(event.target.value);
+    setState({...state, colorName:event.target.value});
   }
 
   const handleDrawerOpen = () => {
@@ -92,9 +102,7 @@ function PaletteNew() {
   }
 
   const addNewColor = (event) => {
-    console.log('before submit')
-    // console.log()
-    setColors([...colors, {color:hex, name:colorName}]);
+    setState({colorName:'', colors:[...state.colors, {color:hex, name:state.colorName}]})
   }
 
   return (
@@ -145,21 +153,21 @@ function PaletteNew() {
         <ValidatorForm
           // ref="form"
           onSubmit={addNewColor}
-          onError={(errors => console.log(errors))}>
+          onError={(errors => console.log("DEFAULT", errors))}>
             <TextValidator
               label="Color Name"
               onChange={handleColorNameChange}
-              value={colorName}
-              validators={['required']}
-              errorMessages={['please input color name']}
+              value={state.colorName}
+              validators={['required', 'isColorNameUnique', 'isColorUnique']}
+              errorMessages={['Please input Color Name', 'Color Name Already Exists', 'Color already used']}
             />
-          <Button type="submit" variant="contained" color="primary" sx={{backgroundColor:hex}}>Add Color</Button>
+            <Button type="submit" variant="contained" color="primary" sx={{backgroundColor:hex}}>Add Color</Button>
         </ValidatorForm>
 
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colors.map((color) => (<DraggableColorBox key={color.name} {...color} />))}
+        {state.colors.map((color) => (<DraggableColorBox key={color.name} {...color} />))}
       </Main>
     </Box>
   );
