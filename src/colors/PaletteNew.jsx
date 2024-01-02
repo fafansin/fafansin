@@ -70,29 +70,34 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 //
 
 function PaletteNew() {
-  const [ state, setState ] = useState({paletteName:'', colorName:'', colors:[{color:'green', name:'green'}]})
+  // const [ state, setState ] = useState({paletteName:'', colorName:'', colors:[{color:'green', name:'green'}]})
   const [ open, setOpen ] = useState(true);
   const [ hex, setHex ] = useState("magenta");
+  // const [ names, setNames ] = useState({color:'', palatte:''})
+  const [ color, setColor ] = useState('');
+  const [ palette, setPalette ] = useState('');
+  const [ colors, setColors ] = useState([{color:'green', name:'green'}]);
   //
   const navigate = useNavigate();
 
   
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
-      return state.colors.every(({name}) => name.toLowerCase() !== value.toLowerCase());
+      return colors.every(({name}) => name.toLowerCase() !== value.toLowerCase());
     });
 
     ValidatorForm.addValidationRule('isColorUnique', (value) => {
-      return state.colors.every(({color}) => color !== hex);
+      return colors.every(({color}) => color !== hex);
     });
 
   })
-  
-  const handleChange = (event) => {
-    setState({...state, [event.target.name]:event.target.value});
+  const handleChangePaletteName = (event) => {
+    setPalette(event.target.value);
   }
-
-  const handleDrawerOpen = () => {
+  const handleChangeColorName = (event) => {
+    setColor(event.target.value)
+  }
+    const handleDrawerOpen = () => {
     setOpen(true);
   };
 
@@ -105,19 +110,24 @@ function PaletteNew() {
   }
 
   const addNewColor = (event) => {
-    setState({colorName:'', colors:[...state.colors, {color:hex, name:state.colorName}]})
+    setColors([...colors, {color:hex, name:color}]);
+    setColor('');
   }
 
   const savePalette = (event) => {
     console.log("SAVE ME!");
     const newPalette = {
-      paletteName: state.paletteName,
-      id: state.paletteName.toLowerCase().replace(/ /g, "-"),
-      colors: state.colors
+      palette: palette,
+      id: palette.toLowerCase().replace(/ /g, "-"),
+      colors: colors
     }
     console.log(newPalette);
     // I should be handling the saving here
     navigate('/palettes')
+  }
+
+  const remove = (colorName) => {
+    setColors(colors.filter((element) => element.name !== colorName))
   }
 
   return (
@@ -138,7 +148,14 @@ function PaletteNew() {
             Persistent drawer
           </Typography>
           <ValidatorForm onSubmit={savePalette} style={{display:"flex"}}>
-            <TextValidator label="Palette Name" name="paletteName" onChange={handleChange} value={state.paletteName}/>
+            <TextValidator 
+              label="Palette Name" 
+              name="palette" 
+              onChange={handleChangePaletteName} 
+              value={palette}
+              validators={['required']}
+              errorMessages={['Enter Palette Name']}
+            />
             <Button type="submit" variant="contained" color="primary">Save Palette</Button>
           </ValidatorForm>
           
@@ -177,9 +194,9 @@ function PaletteNew() {
           onError={(errors => console.log("DEFAULT", errors))}>
             <TextValidator
               label="Color Name"
-              name="colorName"
-              onChange={handleChange}
-              value={state.colorName}
+              name="color"
+              onChange={handleChangeColorName}
+              value={color}
               validators={['required', 'isColorNameUnique', 'isColorUnique']}
               errorMessages={['Please input Color Name', 'Color Name Already Exists', 'Color already used']}
             />
@@ -189,7 +206,7 @@ function PaletteNew() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {state.colors.map((color) => (<DraggableColorBox key={color.name} {...color} />))}
+        {colors.map((color) => (<DraggableColorBox key={color.name} {...color} remove={remove}/>))}
       </Main>
     </Box>
   );
