@@ -1,0 +1,44 @@
+@import '../custom.scss';
+.drum{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  .display-wrap{
+    text-align: center;
+    padding: 10px;
+  }
+  .machine{
+    width: 350px;
+    background-color: whitesmoke;
+  }
+  
+  .drum-pads{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    padding:20px 0;
+    
+  }
+  .drum-pad{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    cursor:pointer;
+    font-size: 1.5rem;
+    color:$light;
+    transition: background-color 80ms ease-in-out;
+    background-color: $primary;
+    &:hover{
+      opacity: 90%;
+    }
+  }
+  .active{
+    background-color: $orange !important;
+    border-color: $orange;
+  }
+}

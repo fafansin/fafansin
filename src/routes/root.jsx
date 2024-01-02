@@ -1,17 +1,17 @@
 import React from 'react';
-import Nav from '../nav/Nav'
+import Navigation from '../nav/Navigation'
 import { Outlet } from 'react-router-dom';
 
-import s from './root.module.css'
+import './root.css';
 
 class Root extends React.Component{
   render(){
     return(
-      <>
-        <div className={s.navWrap}>
-          <Nav />
+      <> 
+        <div className="navWrap">
+          <Navigation />
         </div>
-        <div id="content" className={s.content}>
+        <div id="content" className="d-flex flex-column align-items-center pt-3 bg-light">
           <Outlet />
         </div>
       </>

@@ -1,0 +1,113 @@
+@import "../custom.scss";
+.JokeList{
+  $shadow-custom:-2px 4px 26px -6px rgba(0,0,0,0.66);
+  
+  .my-shadow{
+    box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+    -webkit-box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: -2px 4px 26px -6px rgba(0,0,0,0.66);
+  }
+  
+  
+  background-color: rgb(218, 218, 218);
+  display:flex;
+  justify-content: center;
+  padding: 20px;
+  
+  .left-panel{
+    background-color: $primary;
+    padding: 15px;
+    color:$light;
+    box-shadow: $shadow-custom;
+    -webkit-box-shadow: $shadow-custom;
+    -moz-box-shadow: $shadow-custom;
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    .face{
+      color: yellow;
+      border-radius: 50%;
+      height: 85px;
+      width: 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem;
+      box-shadow: 1px 6px 16px 2px rgba(0,0,0,0.73);
+      -webkit-box-shadow: 1px 6px 16px 2px rgba(0,0,0,0.73);
+      -moz-box-shadow: 1px 6px 16px 2px rgba(0,0,0,0.73);
+    }
+  }
+  ul{
+    margin: 50px 0;
+    background-color: $light;
+    color: $dark;
+    list-style: none;
+    padding: 0;
+    width: 700px;
+    height: 500px;
+    overflow-y: auto;
+
+    .spinner{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $primary;
+      font-size: 3rem;
+      p{
+        font-size: 1rem;
+      }
+    }
+    
+    li{
+      margin: 0;  
+      line-height: 1rem;
+      
+      .Joke{
+        padding: 10px;
+
+        .score{
+          border:2px solid $orange;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .rate{
+          font-size: 2.5rem;
+          border-radius: 50%;
+          .fa-face-grin-squint-tears{
+            color:$purple;
+          }
+          .fa-face-laugh{
+            color:$warning;
+          }
+          .fa-face-smile{
+            color:$teal;
+          }
+          .fa-face-meh{
+            color:$orange;
+          }
+          .fa-face-frown{
+            color:$pink;
+          }
+        }
+        p{
+          margin: 0;
+        }
+      }
+    }
+    li:nth-child(even){
+      background-color: #efefef;
+    }
+  }
+}

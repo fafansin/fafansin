@@ -1,0 +1,36 @@
+// $radius:59% 41% 53% 47% / 39% 80% 20% 61%;
+// $radius:35% 65% 56% 44% / 20% 37% 63% 80% ;
+// $radius:39% 61% 30% 70% / 51% 33% 67% 49%;
+// $radius:39% 61% 52% 48% / 51% 37% 63% 49% ;
+
+.quotes{
+  height: calc(100vh - 79px); 
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding-top: 0 !important;
+  
+  #quote-box{
+    max-width: 800px;
+    background-color: #fff;
+    border-width: 2px;
+    border-style:solid;
+    padding: 30px;
+    // border-radius: 10px;
+    // border-radius:  $radius;
+    padding: 80px;
+  }
+  #author{
+    text-align: right;
+  }
+  .wrap{
+    background-color: #ffffff;
+    // border-radius:  $radius;
+  }
+  .wrap-button{
+    width: 380px;
+    margin-top: 10px;
+  }
+}
