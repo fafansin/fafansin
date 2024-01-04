@@ -27,11 +27,16 @@ import Cards from './cards/Cards';
 import JokeList from './jokes/JokeList';
 import Dogs from './dogs/Dogs';
 import Dog from './dogs/Dog';
-import Palettes from './colors/Palettes';
+import Palette from './colors/Palette';
 import PaletteList from './colors/PaletteList';
 import SingleColorPalette from './colors/SingleColorPalette';
 import PaletteNew from './colors/PaletteNew';
+import PaletteApp from './colors/PaletteApp';
 
+import seedColors from './colors/seedColors.js';
+function getPalettes(){
+  return seedColors;
+}
 
 const router = createBrowserRouter([
   { 
@@ -52,7 +57,6 @@ const router = createBrowserRouter([
       { path: 'todo', element: <Todo /> },
       { path: 'cards', element: <Cards /> },
       { path: 'jokes', element: <JokeList /> },
-      { path: 'dogs', element: <Dogs /> },
     ],
   },
   {
@@ -66,27 +70,17 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/palettes', 
-    element: <PaletteList />, 
+    path: '/palettes',
+    loader: getPalettes,
+    element: <PaletteApp />,
     errorElement: <ErrorPage />,
-  },
-  {
-    path: '/palettes/new', 
-    exact: true,
-    element: <PaletteNew />, 
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/palettes/:id', 
-    element: <Palettes />, 
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/palettes/:paletteId/:colorId', 
-    element: <SingleColorPalette />, 
-    errorElement: <ErrorPage />,
+    children: [
+      { path: '', index:true, element: <PaletteList /> },
+      { path: '/palettes/:id', element: <Palette /> }, 
+      { path: '/palettes/:paletteId/:colorId', element: <SingleColorPalette />}, 
+      { path: '/palettes/new',  exact:true, element: <PaletteNew /> },
+    ]
   }
-
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

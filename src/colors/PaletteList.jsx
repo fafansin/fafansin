@@ -1,11 +1,11 @@
 import React from 'react';
-import seedColors from './seedColors.js';
 import MiniPalettes from './MiniPalettes';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import './PaletteList.scss';
 
+
 function PaletteList() {
-  
+  const [ palettes ] = useOutletContext();
   return (
     <div className="PaletteList">
       <div className="container">
@@ -14,7 +14,7 @@ function PaletteList() {
           <Link to="/palettes/new">Create Palette</Link>
         </nav>
         <div className="palettes">
-          {seedColors.map(palette => ( <MiniPalettes key={palette.id} {...palette} />))}
+          {palettes.map(palette => ( <MiniPalettes key={palette.id} {...palette} />))}
         </div>
       </div>
     </div>

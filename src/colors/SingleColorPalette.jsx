@@ -1,14 +1,14 @@
 import { useRef, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { generatePalette } from './colorHelpers';
-import seedColors from './seedColors.js';
 import { v4 as uuidv4 } from 'uuid';
 import PaletteHeader from './PaletteHeader';
 import PaletteFooter from './PaletteFooter';
 import ColorBox from './ColorBox';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function SingleColorPalette() {
+  const [ pelettes ] = useOutletContext();
   const { paletteId, colorId } = useParams();
   const [ format, setFormat ] = useState('hex');
   const [ paletteData, setPaletteData ] = useState({palette:{paletteName:'', emoji:''}, shades:[]});
@@ -18,7 +18,7 @@ function SingleColorPalette() {
     if(!mounted.current){
       //Getting Information
       mounted.current = true;
-      const pdd = seedColors.find((palette) => palette.id === paletteId);
+      const pdd = pelettes.find((palette) => palette.id === paletteId);
 
       const palette = generatePalette(pdd)
       const referrer = [];
@@ -29,7 +29,7 @@ function SingleColorPalette() {
       setPaletteData({palette:pdd, shades:referrer.splice(1)});
 
     }
-  },[paletteId, colorId])
+  },[paletteId, colorId, pelettes])
 
   function handleChangeFormat(value){
     setFormat(value);

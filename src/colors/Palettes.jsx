@@ -1,15 +1,15 @@
 import React from 'react';
-import seedColors from './seedColors.js';
 import { generatePalette } from './colorHelpers';
-import { useParams } from 'react-router-dom';
+import { useParams, useOutletContext } from 'react-router-dom';
 import Palette from './Palette';
 import '@fontsource/roboto';
 
 function Palettes() {
   const { id } = useParams();
+  const [ palettes, setPalettes ] = useOutletContext();
 
   function findPalette(id){
-    return seedColors.find((palette) => palette.id === id)
+    return palettes.find((palette) => palette.id === id)
   }
 
   return (

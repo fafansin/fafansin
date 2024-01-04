@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorBox from './DraggableColorBox';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import {useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 //
 import { Sketch } from '@uiw/react-color';
 //
@@ -70,13 +70,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 //
 
 function PaletteNew() {
-  // const [ state, setState ] = useState({paletteName:'', colorName:'', colors:[{color:'green', name:'green'}]})
   const [ open, setOpen ] = useState(true);
   const [ hex, setHex ] = useState("magenta");
-  // const [ names, setNames ] = useState({color:'', palatte:''})
   const [ color, setColor ] = useState('');
   const [ palette, setPalette ] = useState('');
   const [ colors, setColors ] = useState([{color:'green', name:'green'}]);
+  const [ palettes, setPalettes ] = useOutletContext();
   //
   const navigate = useNavigate();
 
@@ -117,11 +116,12 @@ function PaletteNew() {
   const savePalette = (event) => {
     console.log("SAVE ME!");
     const newPalette = {
-      palette: palette,
+      paletteName: palette,
       id: palette.toLowerCase().replace(/ /g, "-"),
+      emoji: "=)",
       colors: colors
     }
-    console.log(newPalette);
+    setPalettes([...palettes, newPalette]);
     // I should be handling the saving here
     navigate('/palettes')
   }
