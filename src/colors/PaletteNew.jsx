@@ -70,17 +70,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 //
 
-function PaletteNew() {
+function PaletteNew({maxColors=20}) {
+  const [ palettes, setPalettes ] = useOutletContext();
   const [ open, setOpen ] = useState(true);
   const [ hex, setHex ] = useState("magenta");
   const [ color, setColor ] = useState('');
   const [ palette, setPalette ] = useState('');
-  const [ colors, setColors ] = useState([{color:'green', name:'green'}]);
-  const [ palettes, setPalettes ] = useOutletContext();
+  const [ colors, setColors ] = useState(palettes[0].colors);
   //
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
       return colors.every(({name}) => name.toLowerCase() !== value.toLowerCase());
@@ -135,6 +134,16 @@ function PaletteNew() {
     setColors(arrayMove(colors,oldIndex,newIndex));
   }
 
+  const clearColors = () => {
+    setColors([]);
+  }
+
+  const addRandomColor = () => {
+    const allColors = palettes.map(p => p.colors).flat();
+    const randColor = allColors[Math.floor(Math.random() * allColors.length)];
+    setColors([...colors, randColor]);
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -186,11 +195,11 @@ function PaletteNew() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        {/* Start of the let panel drawe */}
+        {/* Start of the left panel drawer */}
         <Typography variant="h4">Design Your Palette</Typography>
         <div>
-          <Button variant="contained" color="secondary">Clear Palette</Button>
-          <Button variant="contained" color="primary">Random Color</Button>
+          <Button variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
+          <Button variant="contained" color="primary" onClick={addRandomColor} disabled={colors.length >= maxColors}>Random Color</Button>
         </div>
         <Sketch color={hex} onChange={handleColorChange}/>
         <ValidatorForm
@@ -205,7 +214,14 @@ function PaletteNew() {
               validators={['required', 'isColorNameUnique', 'isColorUnique']}
               errorMessages={['Please input Color Name', 'Color Name Already Exists', 'Color already used']}
             />
-            <Button type="submit" variant="contained" color="primary" sx={{backgroundColor:hex}}>Add Color</Button>
+            <Button type="submit" 
+              variant="contained" 
+              color="primary" 
+              sx={{backgroundColor:hex}}
+              disabled={colors.length >= maxColors}
+            >
+              {colors.length >= maxColors ? "Palette is Full" : "Add Color"}
+            </Button>
         </ValidatorForm>
 
       </Drawer>
