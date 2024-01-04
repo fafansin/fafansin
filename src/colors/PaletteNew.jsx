@@ -11,9 +11,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import { arrayMove } from 'react-sortable-hoc';
 //
 import { Sketch } from '@uiw/react-color';
 //
@@ -130,6 +131,10 @@ function PaletteNew() {
     setColors(colors.filter((element) => element.name !== colorName))
   }
 
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    setColors(arrayMove(colors,oldIndex,newIndex));
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -206,7 +211,11 @@ function PaletteNew() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {colors.map((color) => (<DraggableColorBox key={color.name} {...color} remove={remove}/>))}
+        <DraggableColorList 
+          axis="xy" 
+          onSortEnd={onSortEnd}
+          colors={colors} 
+          remove={remove}/>
       </Main>
     </Box>
   );

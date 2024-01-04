@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import IconButton from '@mui/material/IconButton';
+import { SortableElement } from 'react-sortable-hoc';
 
 const DraggableBox = styled('div')(({color}) => ({
   width: "20%",
@@ -37,18 +37,14 @@ const DraggableBox = styled('div')(({color}) => ({
 }));
 
 function DragableColorBox({color, name, remove}) {
-  function handleClick(event){
-    remove(name)
-    console.log("delete this")
-  }
   return (
     <DraggableBox color={color}>
       <div className="boxContent">
         <span>{name}</span>
-        <DeleteIcon className="deleteIcon" onClick={handleClick}/>
+        <DeleteIcon className="deleteIcon" onClick={() => remove(name)}/>
       </div>
     </DraggableBox>
   )
 }
 
-export default DragableColorBox
+export default SortableElement(DragableColorBox)
