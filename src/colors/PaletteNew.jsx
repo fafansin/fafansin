@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorList from './DraggableColorList';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext, Link } from 'react-router-dom';
 import { arrayMove } from 'react-sortable-hoc';
 //
 import { Sketch } from '@uiw/react-color';
@@ -171,6 +171,7 @@ function PaletteNew({maxColors=20}) {
               errorMessages={['Enter Palette Name']}
             />
             <Button type="submit" variant="contained" color="primary">Save Palette</Button>
+            <Button component={Link} variant="contained" color="error" to="/palettes">Go Back</Button>
           </ValidatorForm>
           
           
