@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -8,12 +8,10 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorList from './DraggableColorList';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { arrayMove } from 'react-sortable-hoc';
 import PaletteFormNav from './PaletteFormNav';
-//
-import { Sketch } from '@uiw/react-color';
+import ColorPickerForm from './ColorPickerForm';
 //
 import './PaletteNew.scss';
 
@@ -55,27 +53,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function PaletteNew({maxColors=20}) {
   const [ palettes, setPalettes ] = useOutletContext();
   const [ open, setOpen ] = useState(true);
-  const [ hex, setHex ] = useState("magenta");
-  const [ color, setColor ] = useState('');
   
   const [ colors, setColors ] = useState(palettes[0].colors);
   //
   const navigate = useNavigate();
 
-  useEffect(() => {
-    ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
-      return colors.every(({name}) => name.toLowerCase() !== value.toLowerCase());
-    });
-
-    ValidatorForm.addValidationRule('isColorUnique', (value) => {
-      return colors.every(({color}) => color !== hex);
-    });
-
-  })
-  const handleChangeColorName = (event) => {
-    setColor(event.target.value)
-  }
-    const handleDrawerOpen = () => {
+  const handleDrawerOpen = () => {
     setOpen(true);
   };
 
@@ -83,13 +66,8 @@ function PaletteNew({maxColors=20}) {
     setOpen(false);
   };
 
-  const handleColorChange = (color) => {
-    setHex(color.hex);
-  }
-
-  const addNewColor = (event) => {
-    setColors([...colors, {color:hex, name:color}]);
-    setColor('');
+  function handleAddColor(color) {
+    setColors([...colors, color]);    
   }
 
   const savePalette = (palette) => {
@@ -156,28 +134,7 @@ function PaletteNew({maxColors=20}) {
           <Button variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
           <Button variant="contained" color="primary" onClick={addRandomColor} disabled={colors.length >= maxColors}>Random Color</Button>
         </div>
-        <Sketch color={hex} onChange={handleColorChange}/>
-        <ValidatorForm
-          // ref="form"
-          onSubmit={addNewColor}
-          onError={(errors => console.log("DEFAULT", errors))}>
-            <TextValidator
-              label="Color Name"
-              name="color"
-              onChange={handleChangeColorName}
-              value={color}
-              validators={['required', 'isColorNameUnique', 'isColorUnique']}
-              errorMessages={['Please input Color Name', 'Color Name Already Exists', 'Color already used']}
-            />
-            <Button type="submit" 
-              variant="contained" 
-              color="primary" 
-              sx={{backgroundColor:hex}}
-              disabled={colors.length >= maxColors}
-            >
-              {colors.length >= maxColors ? "Palette is Full" : "Add Color"}
-            </Button>
-        </ValidatorForm>
+        <ColorPickerForm addColor={handleAddColor} maxColors={maxColors} colors={colors} />
 
       </Drawer>
       <Main open={open}>
