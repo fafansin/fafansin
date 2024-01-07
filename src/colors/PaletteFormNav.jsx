@@ -11,10 +11,10 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
 
 
-const drawerWidth = 400;
+// const drawerWidth = 400;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
+})(({ theme, open, drawerWidth }) => ({
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -31,7 +31,7 @@ const AppBar = styled(MuiAppBar, {
   // justifyContent:"space-between"
 }));
 
-function PaletteFormNav({open, onOpen, onSave, palettes}) {
+function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
   const [ palette, setPalette ] = useState('');
   
   useEffect(()=> {
@@ -51,7 +51,7 @@ function PaletteFormNav({open, onOpen, onSave, palettes}) {
   return (
     <div className="PaletteFormNav">
       <CssBaseline />
-      <AppBar position="fixed" open={open} color="default">
+      <AppBar position="fixed" open={open} color="default" drawerWidth={drawerWidth} >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -69,6 +69,7 @@ function PaletteFormNav({open, onOpen, onSave, palettes}) {
             <TextValidator 
               label="Palette Name" 
               name="palette" 
+              variant="standard"
               onChange={handleChangePaletteName} 
               value={palette}
               validators={['required', 'isPaletteUnique']}

@@ -16,7 +16,7 @@ import ColorPickerForm from './ColorPickerForm';
 import './PaletteNew.scss';
 
 //
-const drawerWidth = 400;
+const drawerWidth = 350;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -37,8 +37,21 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     }),
   }),
 );
+const ButtonWrap = styled('div')(() => ({
+  display:"flex",
+  justifyContent:"space-between",
+  padding:"10px",
+  width:"100%",
+}))
 
-
+const Content = styled('div')(() => ({
+  height: "100%",
+  width:"100%",
+  display:"flex",
+  justifyContent: "center",
+  alignItems:"center",
+  flexDirection:"column",
+}))
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -108,7 +121,7 @@ function PaletteNew({maxColors=20}) {
         onOpen={handleDrawerOpen} 
         onSave={savePalette}
         palettes={palettes}
-        drawerWidth={400} />
+        drawerWidth={drawerWidth} />
       <Drawer
         sx={{
           width: drawerWidth,
@@ -128,13 +141,15 @@ function PaletteNew({maxColors=20}) {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <Content>
         {/* Start of the left panel drawer */}
         <Typography variant="h4">Design Your Palette</Typography>
-        <div>
+        <ButtonWrap>
           <Button variant="contained" color="secondary" onClick={clearColors}>Clear Palette</Button>
           <Button variant="contained" color="primary" onClick={addRandomColor} disabled={colors.length >= maxColors}>Random Color</Button>
-        </div>
+        </ButtonWrap>
         <ColorPickerForm addColor={handleAddColor} maxColors={maxColors} colors={colors} />
+        </Content>
 
       </Drawer>
       <Main open={open}>
