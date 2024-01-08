@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import PaletteMetaForm from './PaletteMetaForm';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 
-// const drawerWidth = 400;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open, drawerWidth }) => ({
@@ -32,22 +31,6 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
-  const [ palette, setPalette ] = useState('');
-  
-  useEffect(()=> {
-    ValidatorForm.addValidationRule('isPaletteUnique', (value) => {
-      return palettes.every(({paletteName}) => paletteName.toLowerCase() !== value.toLowerCase());
-    });
-  })
-
-  function handleChangePaletteName(event) {
-    setPalette(event.target.value);
-  }
-  
-  function onSubmit(event) {
-    onSave(palette);
-  }
-
   return (
     <div className="PaletteFormNav">
       <CssBaseline />
@@ -65,19 +48,8 @@ function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
-          <ValidatorForm onSubmit={onSubmit} style={{display:"flex"}}>
-            <TextValidator 
-              label="Palette Name" 
-              name="palette" 
-              variant="standard"
-              onChange={handleChangePaletteName} 
-              value={palette}
-              validators={['required', 'isPaletteUnique']}
-              errorMessages={['Enter Palette Name', 'Palette Name Exists']}
-            />
-            <Button type="submit" variant="contained" color="primary">Save Palette</Button>
-            <Button component={Link} variant="contained" color="error" to="/palettes">Go Back</Button>
-          </ValidatorForm>
+          <PaletteMetaForm palettes={palettes} onSave={(data) => onSave(data)}/>
+          <Button component={Link} variant="contained" color="error" to="/palettes">Go Back</Button>
         </Toolbar>
       </AppBar>
     </div>
