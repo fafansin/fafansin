@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState} from 'react';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
@@ -14,6 +14,12 @@ import Button from '@mui/material/Button';
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open, drawerWidth }) => ({
+  display: "flex",
+  flexDirection:'row',
+  alignItems:"center",
+  height:"64px",
+  gap:"10px",
+  justifyContent:"space-between",
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -26,11 +32,29 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-  // display:"flex",
-  // justifyContent:"space-between"
 }));
 
+const NavBtns = styled('div')(() => ({
+  padding:"0 10px",
+  '& button':{
+    margin:"0 10px",
+  }
+}))
+
 function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
+  const [formShowing, setFormShowing] = useState(false);
+  
+  function showForm(){
+    setFormShowing(true);
+  }
+
+  function hideForm(){
+    setFormShowing(false);
+  }
+
+  function handleOnSave(data){
+    onSave(data);
+  }
   return (
     <div className="PaletteFormNav">
       <CssBaseline />
@@ -45,13 +69,18 @@ function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
-          </Typography>
-          <PaletteMetaForm palettes={palettes} onSave={(data) => onSave(data)}/>
-          <Button component={Link} variant="contained" color="error" to="/palettes">Go Back</Button>
+          <Typography variant="h6" noWrap component="div">Create New Palette</Typography>
         </Toolbar>
+        <NavBtns>
+          <Button component={Link} variant="contained" color="error" to="/palettes">Go Back</Button>
+          <Button variant="contained" onClick={showForm}>Save</Button>
+        </NavBtns>
       </AppBar>
+      {formShowing && (
+        <PaletteMetaForm 
+          palettes={palettes} 
+          hideForm={hideForm} 
+          onSave={handleOnSave}/>)}
     </div>
   )
 }
