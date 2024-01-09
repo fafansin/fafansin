@@ -9,14 +9,15 @@ import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DraggableColorList from './DraggableColorList';
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { arrayMove } from 'react-sortable-hoc';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
+// import SortableList, { SortableItem } from 'react-easy-sort';
+import {arrayMoveImmutable} from 'array-move';
 //
 import './PaletteNew.scss';
 
 //
-const drawerWidth = 350;
+const drawerwidth = 350;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -27,7 +28,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: `-${drawerWidth}px`,
+    marginLeft: `-${drawerwidth}px`,
     ...(open && {
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.easeOut,
@@ -100,8 +101,8 @@ function PaletteNew({maxColors=20}) {
     setColors(colors.filter((element) => element.name !== colorName))
   }
 
-  const onSortEnd = ({oldIndex, newIndex}) => {
-    setColors(arrayMove(colors,oldIndex,newIndex));
+  const onSortEnd = (oldIndex, newIndex) => {
+    setColors(arrayMoveImmutable(colors, oldIndex, newIndex));
   }
 
   const clearColors = () => {
@@ -121,13 +122,13 @@ function PaletteNew({maxColors=20}) {
         onOpen={handleDrawerOpen} 
         onSave={savePalette}
         palettes={palettes}
-        drawerWidth={drawerWidth} />
+        drawerwidth={drawerwidth} />
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: drawerwidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: drawerwidth,
             boxSizing: 'border-box',
           },
         }}
@@ -155,7 +156,6 @@ function PaletteNew({maxColors=20}) {
       <Main open={open}>
         <DrawerHeader />
         <DraggableColorList 
-          axis="xy" 
           onSortEnd={onSortEnd}
           colors={colors} 
           remove={remove}/>

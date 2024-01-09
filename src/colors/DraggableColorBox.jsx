@@ -1,9 +1,9 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { SortableElement } from 'react-sortable-hoc';
+import { SortableItem } from 'react-easy-sort';
 
-const DraggableBox = styled('div')(({color}) => ({
+const Main = styled('div')(({color}) => ({
   width: "20%",
   height: "25%",
   margin: "0 auto",
@@ -37,14 +37,20 @@ const DraggableBox = styled('div')(({color}) => ({
 }));
 
 function DragableColorBox({color, name, remove}) {
+  function onClick(){
+    remove(name)
+  }
   return (
-    <DraggableBox color={color}>
-      <div className="boxContent">
-        <span>{name}</span>
-        <DeleteIcon className="deleteIcon" onClick={() => remove(name)}/>
-      </div>
-    </DraggableBox>
+    <SortableItem>
+      <Main color={color}>
+        <div className="boxContent">
+          <span>{name}</span>
+          <DeleteIcon className="deleteIcon" onClick={onClick}/>
+        </div>
+      </Main>
+    </SortableItem>
+
   )
 }
 
-export default SortableElement(DragableColorBox)
+export default DragableColorBox

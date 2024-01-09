@@ -41,7 +41,7 @@ const NavBtns = styled('div')(() => ({
   }
 }))
 
-function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
+function PaletteFormNav({open, onOpen, onSave, palettes, drawerwidth}) {
   const [formShowing, setFormShowing] = useState(false);
   
   function showForm(){
@@ -58,7 +58,7 @@ function PaletteFormNav({open, onOpen, onSave, palettes, drawerWidth}) {
   return (
     <div className="PaletteFormNav">
       <CssBaseline />
-      <AppBar position="fixed" open={open} color="default" drawerWidth={drawerWidth} >
+      <AppBar position="fixed" open={open} color="default" drawerwidth={drawerwidth} >
         <Toolbar>
           <IconButton
             color="inherit"

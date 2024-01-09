@@ -1,19 +1,19 @@
 import React from 'react';
-import { SortableContainer } from 'react-sortable-hoc';
 import DraggableColorBox from './DraggableColorBox';
+import SortableList from 'react-easy-sort';
+import { styled } from '@mui/material/styles';
+const MainList = styled(SortableList)(() => ({
+  height:"100%"
+}))
 
-function DraggableColorList({colors, remove}) {
+function DraggableColorList({colors, remove, onSortEnd}) {
   return (
-    <div className="DraggableColorList" style={{height:"100%"}}>
+    <MainList onSortEnd={onSortEnd} className="DraggableColorList">
       {colors.map((color, i) => (
-        <DraggableColorBox 
-          index={i}
-          key={color.name} 
-          remove={remove}
-          {...color} />
+        <DraggableColorBox key={color.name} color={color.color} name={color.name} remove={remove}/>
       ))}
-    </div>
+    </MainList>
   )
 }
 
-export default SortableContainer(DraggableColorList);
+export default DraggableColorList;
