@@ -5,7 +5,12 @@ import './PaletteList.scss';
 
 
 function PaletteList() {
-  const [ palettes ] = useOutletContext();
+  const [ palettes, setPalettes ] = useOutletContext();
+  function onDelete(id){
+    // alert(id);
+    // console.log(palettes);
+    setPalettes(palettes.filter(item => item.id !== id))
+  }
   return (
     <div className="PaletteList">
       <div className="container">
@@ -14,7 +19,7 @@ function PaletteList() {
           <Link to="/palettes/new">Create Palette</Link>
         </nav>
         <div className="palettes">
-          {palettes.map(palette => ( <MiniPalettes key={palette.id} {...palette} />))}
+          {palettes.map(palette => ( <MiniPalettes key={palette.id} {...palette} onDelete={onDelete}/>))}
         </div>
       </div>
     </div>
