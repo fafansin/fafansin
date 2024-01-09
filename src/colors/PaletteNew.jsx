@@ -84,16 +84,17 @@ function PaletteNew({maxColors=20}) {
     setColors([...colors, color]);    
   }
 
-  const savePalette = (palette) => {
+  const savePalette = ({palette, emoji}) => {
     
     const newPalette = {
       paletteName: palette,
       id: palette.toLowerCase().replace(/ /g, "-"),
-      emoji: "=)",
+      emoji: emoji,
       colors: colors
     }
+    // console.log("WEIRDS", newPalette);
     setPalettes([...palettes, newPalette]);
-    // I should be handling the saving here
+    // // I should be handling the saving here
     navigate('/palettes')
   }
 
