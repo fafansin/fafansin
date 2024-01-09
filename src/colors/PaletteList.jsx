@@ -7,8 +7,6 @@ import './PaletteList.scss';
 function PaletteList() {
   const [ palettes, setPalettes ] = useOutletContext();
   function onDelete(id){
-    // alert(id);
-    // console.log(palettes);
     setPalettes(palettes.filter(item => item.id !== id))
   }
   return (
