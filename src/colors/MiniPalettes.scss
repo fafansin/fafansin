@@ -5,9 +5,9 @@
   position: relative;
   overflow: hidden;
   padding: 10px;
-
-  &:hover{
-    cursor: pointer;
+  cursor: pointer;
+  &:hover .deleteIcon{
+    opacity: 1;
   }
 
   .colors{
@@ -35,5 +35,19 @@
   .emoji{
     margin-left: 0.5rem;
     font-size: 1.5rem;
+  }
+  .delete{
+    border: 1px solid green;
+  }
+  .deleteIcon{
+    color: white;
+    background-color: #eb3d30;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top:5px;
+    right:5px;
+    z-index: 1000;
+    opacity: 0;
   }
 }
